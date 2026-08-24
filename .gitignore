@@ -1,0 +1,31 @@
+# DevLens
+
+# Dependencies
+node_modules/
+.gradle/
+build/
+
+# Environment
+.env
+.env.local
+local.properties
+
+# IDE
+.idea/
+*.iml
+
+# Android
+*.apk
+*.aab
+*.dex
+*.class
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cursor skills (local tools, not project code)
+.cursor/
