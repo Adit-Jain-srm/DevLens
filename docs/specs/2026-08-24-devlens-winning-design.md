@@ -6,10 +6,19 @@
 
 ## One-Line Identity (What Judges Remember)
 
-> **"DevLens: intelligence lives on the phone, execution lives on the laptop."**
+> **"Point. Speak. Fixed."**
 
-Every other AI dev tool puts the brain in the cloud and the UI on a screen.
-DevLens inverts this. The phone IS the brain.
+*The first developer tool with eyes and ears.*
+
+When judges reconvene and ask "which one was that?" — the answer is: "the one where you point the phone at the bug and say fix it."
+
+### The Scenario That Makes You Feel It
+
+It's 11:40 PM. Priya has been staring at the same bug for forty minutes. Her terminal shows a TypeError. Her browser console has CORS errors. The API docs say one thing, the actual response says another. She opens Cursor. Types "I'm getting a TypeError..." and stops. To explain this to the AI she'd need to screenshot the terminal, copy the console, paste Slack messages, point to the file, explain the history. Five minutes of context assembly for a question that might not be the right question.
+
+So she guesses. Adds a null check. Runs tests. Three fail. Different error. Another guess. By 12:30 AM she finds it — a refactored middleware moved `req.user` to `req.auth.user`. Forty minutes. The fix was one line.
+
+**With DevLens:** Point phone at terminal. "Fix this." Agent finds the renamed path in yesterday's git diff, patches the three route handlers, runs tests: "Fixed. 12 passing." Under 30 seconds.
 
 ---
 
@@ -374,7 +383,7 @@ Result: "DRIFT: Redis Cache appears in diagram but package.json has no redis/ior
 Phone pointed at laptop. Laptop has a Node.js project with a deliberate bug open.
 
 ### Act 1: The Problem (20s)
-> "Every AI coding tool is text-only. They can't see your terminal. They can't hear you say 'fix this.' DevLens changes that. The phone is the brain — it sees, it understands, it commands."
+> "It's 11:40 PM. You've been staring at the same bug for forty minutes. The error is in the terminal. The context is in the browser, the docs, the IDE, and a Slack thread from yesterday. Your AI assistant needs you to screenshot, copy, paste, and explain — five minutes just to ask the right question. DevLens changes that."
 
 ### Act 2: Visual Error Detection (60s)
 - Terminal shows `TypeError: Cannot read properties of undefined (reading 'user')`
@@ -401,7 +410,7 @@ Phone pointed at laptop. Laptop has a Node.js project with a deliberate bug open
 - **Judges see:** Physical world → digital world reasoning. Only possible with a phone camera.
 
 ### Act 5: Close (30s)
-> "DevLens sees what your coding copilot can't. Intelligence on the phone. Execution on the laptop. Point. Speak. Fixed."
+> "Point. Speak. Fixed. DevLens is the first developer tool with eyes and ears — because your AI debugger shouldn't need you to type what it could just see."
 
 ---
 

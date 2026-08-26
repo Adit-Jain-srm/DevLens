@@ -1,6 +1,10 @@
 # DevLens — Enhanced Core: Why It Debugs Better
 
+> **Point. Speak. Fixed.** — *The first developer tool with eyes and ears.*
+
 ## Academic & Industry Evidence Base
+
+Priya spent forty minutes on a one-line bug — not because the fix was hard, but because she spent 57% of that time manually bridging what she could SEE with what her AI tool could UNDERSTAND. The research below proves this isn't anecdotal. It's structural. And it's what DevLens eliminates.
 
 ---
 

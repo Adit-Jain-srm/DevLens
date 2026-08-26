@@ -2,46 +2,46 @@
 
 ## iQOO Hackathon 2026 · Developer Tools Track
 
+> **Point. Speak. Fixed.**
+
 ---
 
 ## Problem: What are you solving, and for whom?
 
-**For:** Software developers (mobile, web, backend, full-stack) who debug in messy, multi-context environments.
+It's 11:40 PM. Priya has been staring at the same bug for forty minutes.
 
-**The Problem:**
+Her terminal shows a `TypeError: Cannot read properties of undefined`. Her browser console has three CORS errors from the same endpoint. The API docs on her second monitor say the response includes a `user` object, but the actual response she's logging doesn't have one — and she can't tell if that's a backend bug or a stale cache.
 
-A real debugging session involves terminal errors, IDE screens, browser consoles, API responses, documentation, architecture diagrams, whiteboards, and voice explanations — often simultaneously. Yet every existing AI coding tool operates in a single narrow channel: text in a code editor.
+She opens Cursor. Types "I'm getting a TypeError..." and stops. The error is in the terminal. The relevant context is spread across the browser, the API docs, the IDE, and a Slack thread from yesterday where her teammate said "I refactored the auth middleware." To explain this to the AI, she'd need to screenshot the terminal, copy the browser console, paste the relevant Slack messages, point to the file, explain the history. Five minutes of context assembly for a question that might not even be the right question.
 
-Developers waste 30-40% of their debugging time on:
-1. **Context switching** — screenshotting errors, copy-pasting terminal output, explaining context
-2. **Manual bridging** — moving information between what they SEE and what the AI KNOWS
-3. **Unverified fixes** — AI suggests code but doesn't run tests or confirm it actually works
-4. **Lost context** — every new AI prompt starts from zero; no session memory
+So she does what she's done a hundred times before. She guesses. She adds a null check where she thinks the crash is happening. She runs the tests. Three fail. Different error now. Another guess. Another cycle. By 12:30 AM she finds it — the refactored middleware moved the user object from `req.user` to `req.auth.user`, and three route handlers still use the old path.
 
-**Core insight:** The gap isn't in AI's coding ability — it's in AI's inability to perceive the developer's full environment.
+Forty minutes of pain. The fix was one line. The debugging was forty minutes of manually being the bridge between what she could SEE and what her tools could UNDERSTAND.
+
+**This is the problem DevLens solves.**
+
+She would have pointed her phone at the terminal. DevLens would have read the error on-device in 100ms. She'd have said "fix this." The agent would have searched the codebase, found the refactored path in the git diff from yesterday, generated the one-line fix, applied it, run the tests — and reported back: "Fixed. 12 tests passing." Elapsed time: under 30 seconds.
+
+**The gap isn't in AI's coding ability. It's in AI's inability to see what the developer sees.**
+
+Every AI coding tool in 2026 — Cursor, Claude Code, Copilot, Devin — operates through a text box. The developer must manually translate their multi-sensory debugging experience (screen, terminal, browser, voice, memory) into typed text. That translation is where time dies.
+
+DevLens eliminates the translation.
 
 ---
 
 ## Your Idea: What are you proposing?
 
-**DevLens** is a phone-first multimodal AI developer agent.
+**DevLens** is the first developer tool with eyes and ears.
 
-The iQOO phone becomes the developer's **eyes** (camera), **ears** (microphone), and **command center** (on-device AI) — observing errors, understanding context, then autonomously investigating, fixing, testing, and verifying through the laptop.
+The iQOO phone becomes the developer's **perception layer** — its camera sees errors, its microphone hears explanations, its NPU understands context on-device — and then it commands the laptop to investigate, fix, test, and verify. The developer's only job is to point and speak.
 
 ### The Loop
 
 ```
-OBSERVE (Phone)          →  Camera / Voice / Screen
-       ↓
-UNDERSTAND (On-device)   →  OCR, Speech, Image Analysis (Gemini Nano)
-       ↓
-REASON (Cloud)           →  Root Cause Analysis (OpenRouter)
-       ↓
-ACT (Laptop)             →  Search Files / Generate Patch / Apply
-       ↓
-VERIFY (Laptop → Phone)  →  Run Tests / Check Results
-       ↓
-EXPLAIN (Phone)          →  Report to Developer
+POINT  (Phone camera)   →  See the error, read it on-device
+SPEAK  (Phone mic)      →  "Fix this and run the tests"
+FIXED  (Laptop agent)   →  Search → Patch → Test → Verify → Report back
 ```
 
 **Instead of:** Screenshot → paste into chat → read answer → manually apply → hope it works
@@ -54,7 +54,9 @@ EXPLAIN (Phone)          →  Report to Developer
 
 ### Primary USP
 
-> **"Coding copilots understand your repository. DevLens understands your development environment."**
+> **"Point. Speak. Fixed."**
+
+> *The first developer tool with eyes and ears.*
 
 ### The Core Innovation: Intelligence Inversion
 
@@ -126,50 +128,60 @@ See "30-Hour Build Plan" section below.
 
 ### Who Would Use This
 
-1. **Individual developers** debugging complex multi-context issues
-2. **Junior developers** who struggle to identify root causes across files
-3. **IoT/embedded developers** bridging physical hardware and code (post-hackathon)
-4. **Team leads** doing code reviews by pointing at architecture diagrams
-5. **Students** learning to debug by watching the agent's reasoning process
+**Primary: The 11 PM debugger.** Any developer who has ever spent more time EXPLAINING a bug to an AI tool than it would take to fix it manually. DevLens eliminates the explanation step entirely.
 
-### Real Impact Numbers
+**Secondary: The code reviewer on the move.** An engineer who gets a PR notification, needs to understand the change, but isn't at a desk. DevLens can scan the diff, rank by blast radius, and let them approve by voice.
 
-- **~40% reduction in context-switching time** (no manual screenshot/copy/paste cycles)
-- **First-fix success rate improvement** (verification loop catches failures before the developer even sees them)
-- **Onboarding acceleration** — New devs point phone at codebase, get instant architecture understanding
+**Tertiary: The junior developer learning to debug.** Watching DevLens's reasoning chain — "I see this error → it's likely caused by → here's the relevant file → the git diff shows this changed yesterday" — teaches debugging methodology by example.
 
-### Why Now
+### Why Existing Tools Fail These Users
 
-- On-device multimodal AI (Gemini Nano) just became production-ready on Android in 2025-2026
-- Snapdragon NPU performance makes real-time inference practical without cloud calls
-- Developer frustration with "chat-only" AI tools is at an all-time high
-- Phone cameras now rival dedicated scanners for OCR accuracy
+| User Need | Cursor/Claude Code | Devin | DevLens |
+|-----------|-------------------|-------|---------|
+| "Read this error from my terminal" | Can't (text-only input) | Can't (ticket-based) | Camera reads it in 100ms |
+| "What changed since it last worked?" | Developer must run git log manually | Searches repo autonomously but 46% wrong | Checks git diff automatically, correlated with visual error |
+| "Fix it and prove it works" | Suggests fix, developer applies manually | Applies fix, 46% of fixes rejected | Applies fix, runs tests, reports verified result |
+| "Remember we already tried X" | Stateless — every prompt is fresh | Cross-session memory | Session memory with full debugging context graph |
+| "I can't type right now" | No voice input | No voice input | Full voice command interface |
+
+### Why Now (Market Timing)
+
+1. **Gemini Nano** became production-ready on Android in 2025-2026 — multimodal on-device inference was not possible before
+2. **Snapdragon NPU at 45+ TOPS** — the hardware can now run meaningful AI locally
+3. **Developer frustration with chat-only AI** is peaking — "I spend more time prompting than debugging" is a common complaint in engineering communities
+4. **Phone cameras at 50MP** now rival dedicated scanners — ML Kit OCR accuracy on modern hardware is sufficient for code-level text recognition
+5. **The iQOO hackathon** exists — phone-first AI development is explicitly incentivized
 
 ---
 
 ## Scalability: Beyond a Hackathon Prototype
 
-### Phase 1: Hackathon MVP (30 hours)
-- Core loop: Camera → OCR → Agent → Fix → Test
-- Voice commands
-- Single project support
+### Phase 1: Hackathon MVP
+- Core loop: Point → Speak → Fixed
+- Voice commands (fix, explain, test, undo)
+- Single project, single language
+- Session memory (in-memory)
+- Architecture drift detection (whiteboard → code comparison)
 
-### Phase 2: Post-Hackathon Product (1-3 months)
-- Multiple IDE integrations (VS Code extension, JetBrains plugin)
-- Persistent debugging history across sessions
-- Team collaboration (share debugging sessions)
-- Custom agent templates for different frameworks
+### Phase 2: Developer Product (1-3 months)
+- **Multi-language support** via OpenRouter model routing
+- **Persistent debugging history** — every session's Context Graph saved to a timeline
+- **Blast-radius ranking** — GLANCE-style diff ranking by impact (callers, dependents)
+- **Incident report generation** — one-tap summary of what broke, why, how it was fixed, and what to watch for
+- **VS Code extension** — receives DevLens commands, highlights affected files
 
-### Phase 3: Platform (6+ months)
-- Marketplace for specialized debugging agents
-- Enterprise deployment (on-premises agent execution)
-- CI/CD integration (point phone at failing pipeline)
-- Cross-platform (iOS support)
+### Phase 3: Team Platform (6+ months)
+- **Shared debugging sessions** — team members see the same Context Graph
+- **Debugging playbooks** — "when you see this error pattern, try these steps first"
+- **CI/CD integration** — point phone at a failing pipeline dashboard, DevLens investigates
+- **Cross-platform** — iOS app, desktop companion
+- **Enterprise** — on-premises deployment, SOC2, audit logging
 
 ### Business Model
-- Freemium: Basic OCR + voice free, advanced agent actions subscription
-- Team tier: Shared session memory, team debugging history
-- Enterprise: Self-hosted, compliance, custom agents
+- **Free tier**: Camera OCR + voice + on-device classification (no cloud, no cost)
+- **Pro** ($15/mo): Cloud reasoning via OpenRouter, persistent history, incident reports
+- **Team** ($40/seat/mo): Shared sessions, blast-radius analysis, playbooks
+- **Enterprise**: Self-hosted, custom agents, compliance
 
 ---
 
@@ -438,20 +450,18 @@ This is not just a checkbox feature — it's architecturally meaningful because 
 
 ## Why Our Team Should Be Selected
 
-1. **Deep technical research completed** — Every component validated against actual iQOO 15 hardware specs
-2. **Architecture is phone-first by design** — Not a laptop app ported to phone; the phone IS the intelligence layer
-3. **Genuinely novel** — No existing tool combines physical-world perception with agentic code execution
-4. **Naturally maximizes HackTracker** — Camera, voice, on-device AI, and Office Kit are core to the workflow (not bolted on)
-5. **Scalable beyond hackathon** — Clear product roadmap from MVP to platform
-6. **Demo story is compelling** — Visual, dramatic, easy for judges to understand in 5 minutes
-7. **Risk-mitigated** — Backup plans for every component; no external hardware dependencies
+1. **We've done the research.** 10 peer-reviewed 2026 papers validate our architecture. We know WHY this works, not just what to build.
+2. **The phone isn't an afterthought.** Camera, voice, and on-device AI aren't bolted on — they ARE the product. Remove the phone and DevLens doesn't work.
+3. **We go end-to-end.** Both selected competitors (Repo Guardian, GLANCE) stop at review/analysis. DevLens observes, fixes, tests, AND verifies.
+4. **HackTracker is maximized by design.** Camera usage, voice usage, on-device AI, and Office Kit are core to the workflow — not sprinkled in for points.
+5. **We have a story that sticks.** "Point. Speak. Fixed." — judges will remember which team we are.
+6. **We've studied what wins.** The Delhi 1st place won with local-first execution. GLANCE won on writing quality and sharp technical insight. We've incorporated both lessons.
+7. **We ship working components.** Unlike concept prototypes and README-only submissions, we'll demonstrate real CameraX + ML Kit + WebSocket functionality.
 
 ---
 
 ## Summary
 
-> **DevLens sees what your coding copilot can't.**
+> **Point. Speak. Fixed.**
 
-It's the first developer tool where the phone has a genuine, indispensable role: perceiving the development environment through camera and voice, reasoning with on-device AI, and commanding autonomous action on the laptop — with verification built into every step.
-
-The 30-hour build is tight but achievable because every component uses proven, production-ready APIs (ML Kit, CameraX, OkHttp, node-pty, OpenRouter) running on hardware explicitly designed for on-device AI (Snapdragon 8 Elite Gen 5 NPU).
+DevLens is the first developer tool with eyes and ears. It sees what your coding copilot can't — because your AI debugger shouldn't need you to type what it could just see.
