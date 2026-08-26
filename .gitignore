@@ -27,5 +27,6 @@ local.properties
 .DS_Store
 Thumbs.db
 
-# Cursor skills (local tools, not project code)
+# Competitor analysis (cloned repos, not tracked)
+.competitor-analysis/
 .cursor/
