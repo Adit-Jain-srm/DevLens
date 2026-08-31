@@ -170,11 +170,15 @@ We have built and validated:
 
 ## Team
 
-| Member | Role | Key Skills | Why Them |
-|---|---|---|---|
-| **[Name]** | Mobile Dev Lead | Kotlin, Jetpack Compose, CameraX, ML Kit | [Experience] |
-| **[Name]** | Agent/Backend Dev | Node.js, TypeScript, AI APIs, terminal automation | [Experience] |
-| **[Name]** | Integration/Demo | Full-stack, Office Kit, demo scripting, pitch | [Experience] |
+**Team Arize** — 3 members, full-spectrum coverage across mobile, backend, and AI.
+
+| Member | Role | Responsibilities |
+|--------|------|-----------------|
+| **Adit Jain** (Leader) | Mobile Dev Lead | Android app, CameraX, ML Kit, Jetpack Compose UI, on-device AI integration |
+| **Ayush Pandey** | Agent / Backend Dev | Laptop daemon, Node.js agent orchestration, OpenRouter integration, terminal automation |
+| **Mehir Singh** | Integration / Demo | WebSocket bridge, Office Kit integration, demo scripting, pitch delivery |
+
+**Contact:** aditjain2005@gmail.com
 
 ---
 
@@ -469,7 +473,7 @@ This is not a checkbox feature — it is architecturally meaningful because deve
 |---|---|
 | GitHub Repository | *[To be created with scaffold]* |
 | Architecture Diagram | See [Architecture](#architecture) section above |
-| Feasibility Study | `docs/FEASIBILITY_STUDY.md` (detailed technical validation) |
+| Feasibility Study | `docs/research/feasibility-study.md` |
 | Demo Video | *[To be recorded with MVP prototype]* |
 | Technology Validation | ML Kit GenAI confirmed on iQOO devices |
 

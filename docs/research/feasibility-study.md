@@ -277,7 +277,7 @@ Custom UI animations, multi-language support, account/auth, database persistence
 
 **No existing tool combines:** phone camera as perception layer + voice commands + on-device AI + laptop execution + autonomous verification + session memory.
 
-See `docs/competitive-intel.md` for detailed Phase 2 competitor analysis.
+See `docs/strategy/competitive-intel.md` for detailed Phase 2 competitor analysis.
 
 ---
 
@@ -334,13 +334,13 @@ ML Kit OCR + Image Description confirmed on iQOO. No external hardware. LLM reas
 - [ ] GitHub repository
 - [ ] Reskilll platform registration
 
-### Team Roles
+### Team Arize
 
-| Role | Responsibility |
-|------|---------------|
-| Mobile Dev (Lead) | Android app, CameraX, ML Kit, Compose UI |
-| Agent/Backend Dev | Laptop daemon, agent logic, OpenRouter, tools |
-| Integration/Demo | Office Kit, WebSocket bridge, demo prep, pitch |
+| Member | Role | Responsibility |
+|--------|------|---------------|
+| **Adit Jain** (Leader) | Mobile Dev Lead | Android app, CameraX, ML Kit, Compose UI |
+| **Ayush Pandey** | Agent/Backend Dev | Laptop daemon, agent logic, OpenRouter, tools |
+| **Mehir Singh** | Integration/Demo | Office Kit, WebSocket bridge, demo prep, pitch |
 
 ---
 
