@@ -22,41 +22,175 @@ import { architecture } from '../data/content';
     </div>
 
     <!-- Animated SVG Flow Diagram -->
-    <div class="max-w-4xl mx-auto mb-16 scroll-reveal">
-      <div class="dl-card rounded-2xl p-6 sm:p-8 overflow-hidden">
-        <div class="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider mb-6">DATA FLOW TOPOLOGY</div>
-        <div class="relative h-32 sm:h-40 w-full">
-          <svg id="arch-flow-svg" class="w-full h-full" viewBox="0 0 800 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Phone Node -->
-            <rect x="20" y="30" width="180" height="80" rx="12" fill="#0C0D14" stroke="#00D4FF" stroke-width="1.5" class="arch-node" />
-            <text x="110" y="60" text-anchor="middle" fill="#00D4FF" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">📱 iQOO Phone</text>
-            <text x="110" y="80" text-anchor="middle" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="8">Camera · Voice · NPU</text>
-            <text x="110" y="95" text-anchor="middle" fill="#00D4FF" font-family="JetBrains Mono, monospace" font-size="7" opacity="0.6">PERCEPTION</text>
+    <div class="max-w-5xl mx-auto mb-16 scroll-reveal">
+      <div class="dl-card rounded-2xl p-6 sm:p-8 overflow-hidden relative">
+        <div class="absolute inset-0 grid-dense opacity-[0.04] pointer-events-none"></div>
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-6">
+            <div class="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider">DATA FLOW TOPOLOGY</div>
+            <div class="flex items-center gap-3 text-[9px] font-mono text-zinc-600">
+              <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#00D4FF]"></span> On-Device</span>
+              <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]"></span> Bridge</span>
+              <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span> Execution</span>
+              <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span> Cloud (on demand)</span>
+            </div>
+          </div>
 
-            <!-- Bridge -->
-            <rect x="310" y="30" width="180" height="80" rx="12" fill="#0C0D14" stroke="#8B5CF6" stroke-width="1.5" class="arch-node" />
-            <text x="400" y="60" text-anchor="middle" fill="#8B5CF6" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">🔗 WebSocket</text>
-            <text x="400" y="80" text-anchor="middle" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="8">Local Wi-Fi · Office Kit</text>
-            <text x="400" y="95" text-anchor="middle" fill="#8B5CF6" font-family="JetBrains Mono, monospace" font-size="7" opacity="0.6">BRIDGE</text>
+          <div class="relative w-full" style="aspect-ratio: 900 / 440;">
+            <svg id="arch-flow-svg" class="w-full h-full" viewBox="0 0 900 440" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-            <!-- Laptop Node -->
-            <rect x="600" y="30" width="180" height="80" rx="12" fill="#0C0D14" stroke="#10B981" stroke-width="1.5" class="arch-node" />
-            <text x="690" y="60" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">💻 Laptop</text>
-            <text x="690" y="80" text-anchor="middle" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="8">Agent · Terminal · Git</text>
-            <text x="690" y="95" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="7" opacity="0.6">EXECUTION</text>
+              <!-- ═══════ PHONE LAYER (LEFT) ═══════ -->
+              <rect x="20" y="20" width="260" height="400" rx="16" fill="#080910" stroke="#00D4FF" stroke-width="1" opacity="0.4" class="topo-zone" />
+              <text x="150" y="46" text-anchor="middle" fill="#00D4FF" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" letter-spacing="0.1em">iQOO PHONE — THE BRAIN</text>
 
-            <!-- Connection Lines -->
-            <line x1="200" y1="70" x2="310" y2="70" stroke="#00D4FF" stroke-width="1.5" stroke-dasharray="6 4" class="arch-line" />
-            <line x1="490" y1="70" x2="600" y2="70" stroke="#10B981" stroke-width="1.5" stroke-dasharray="6 4" class="arch-line" />
+              <!-- Camera -->
+              <rect x="40" y="64" width="100" height="52" rx="8" fill="#0C0D14" stroke="#00D4FF" stroke-width="1.2" class="arch-node" />
+              <text x="90" y="84" text-anchor="middle" fill="#00D4FF" font-family="JetBrains Mono, monospace" font-size="8" font-weight="600">CameraX</text>
+              <text x="90" y="100" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6.5">50MP · <100ms</text>
 
-            <!-- Animated data particles -->
-            <circle id="arch-particle-1" cx="200" cy="70" r="4" fill="#00D4FF" opacity="0.8" />
-            <circle id="arch-particle-2" cx="490" cy="70" r="4" fill="#10B981" opacity="0.8" />
+              <!-- Voice -->
+              <rect x="160" y="64" width="100" height="52" rx="8" fill="#0C0D14" stroke="#00D4FF" stroke-width="1.2" class="arch-node" />
+              <text x="210" y="84" text-anchor="middle" fill="#00D4FF" font-family="JetBrains Mono, monospace" font-size="8" font-weight="600">ML Kit Speech</text>
+              <text x="210" y="100" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6.5">On-Device ASR</text>
 
-            <!-- Arrow heads -->
-            <polygon points="305,65 305,75 315,70" fill="#00D4FF" opacity="0.6" />
-            <polygon points="595,65 595,75 605,70" fill="#10B981" opacity="0.6" />
-          </svg>
+              <!-- ML Kit OCR -->
+              <rect x="40" y="132" width="100" height="44" rx="8" fill="#0C0D14" stroke="#00D4FF" stroke-width="0.8" />
+              <text x="90" y="150" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">ML Kit OCR v2</text>
+              <text x="90" y="164" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6">Text Recognition</text>
+
+              <!-- Gemini Nano -->
+              <rect x="160" y="132" width="100" height="44" rx="8" fill="#0C0D14" stroke="#00D4FF" stroke-width="0.8" />
+              <text x="210" y="150" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">Gemini Nano</text>
+              <text x="210" y="164" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6">AICore · NPU</text>
+
+              <!-- Context Engine -->
+              <rect x="60" y="196" width="180" height="52" rx="10" fill="#0A0E18" stroke="#00D4FF" stroke-width="1.5" class="arch-node" />
+              <text x="150" y="218" text-anchor="middle" fill="#00D4FF" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Context Engine</text>
+              <text x="150" y="234" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6.5">Classify · Route · Hypothesis</text>
+
+              <!-- Intent Router -->
+              <rect x="60" y="266" width="180" height="44" rx="8" fill="#0C0D14" stroke="#00D4FF" stroke-width="0.8" />
+              <text x="150" y="284" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">Intent Router</text>
+              <text x="150" y="298" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6">fix · explain · test · undo</text>
+
+              <!-- Compose UI -->
+              <rect x="60" y="328" width="180" height="52" rx="10" fill="#0C0D14" stroke="#00D4FF" stroke-width="0.8" />
+              <text x="150" y="348" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">Jetpack Compose UI</text>
+              <text x="150" y="364" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6">Camera · Chat · Status · Results</text>
+
+              <!-- Internal phone arrows -->
+              <line x1="90" y1="116" x2="90" y2="132" stroke="#00D4FF" stroke-width="0.7" opacity="0.4" />
+              <line x1="210" y1="116" x2="210" y2="132" stroke="#00D4FF" stroke-width="0.7" opacity="0.4" />
+              <line x1="90" y1="176" x2="130" y2="196" stroke="#00D4FF" stroke-width="0.7" opacity="0.4" />
+              <line x1="210" y1="176" x2="170" y2="196" stroke="#00D4FF" stroke-width="0.7" opacity="0.4" />
+              <line x1="150" y1="248" x2="150" y2="266" stroke="#00D4FF" stroke-width="0.7" opacity="0.4" />
+              <line x1="150" y1="310" x2="150" y2="328" stroke="#00D4FF" stroke-width="0.7" opacity="0.4" />
+
+              <!-- ═══════ BRIDGE (CENTER) ═══════ -->
+              <rect x="320" y="170" width="130" height="100" rx="14" fill="#0A0A18" stroke="#8B5CF6" stroke-width="1.5" stroke-dasharray="6 3" class="arch-node" />
+              <text x="385" y="206" text-anchor="middle" fill="#8B5CF6" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">WebSocket</text>
+              <text x="385" y="222" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6.5">OkHttp ↔ ws</text>
+              <text x="385" y="238" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6.5">Local Wi-Fi</text>
+              <text x="385" y="256" text-anchor="middle" fill="#8B5CF6" font-family="JetBrains Mono, monospace" font-size="6" opacity="0.6">< 5ms</text>
+
+              <!-- Office Kit -->
+              <rect x="330" y="296" width="110" height="36" rx="8" fill="#0C0D14" stroke="#8B5CF6" stroke-width="0.8" />
+              <text x="385" y="312" text-anchor="middle" fill="#8B5CF6" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">Office Kit</text>
+              <text x="385" y="324" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="5.5">Mirror · Clipboard · Files</text>
+
+              <!-- Bridge connection to phone -->
+              <path d="M 240 220 C 270 220, 290 220, 320 220" stroke="#00D4FF" stroke-width="1.5" stroke-dasharray="5 3" class="arch-line" />
+              <polygon points="316,216 316,224 324,220" fill="#00D4FF" opacity="0.6" />
+
+              <!-- Bridge return path (results) -->
+              <path d="M 320 230 C 290 230, 270 236, 240 240" stroke="#8B5CF6" stroke-width="1" stroke-dasharray="4 3" class="arch-line" opacity="0.5" />
+              <polygon points="244,236 244,244 236,240" fill="#8B5CF6" opacity="0.4" />
+
+              <!-- Bridge connection to laptop -->
+              <path d="M 450 220 C 480 220, 500 220, 530 220" stroke="#10B981" stroke-width="1.5" stroke-dasharray="5 3" class="arch-line" />
+              <polygon points="526,216 526,224 534,220" fill="#10B981" opacity="0.6" />
+
+              <!-- Laptop return path -->
+              <path d="M 530 230 C 500 230, 480 236, 450 240" stroke="#F59E0B" stroke-width="1" stroke-dasharray="4 3" class="arch-line" opacity="0.5" />
+              <polygon points="454,236 454,244 446,240" fill="#F59E0B" opacity="0.4" />
+
+              <!-- Animated particles on main paths -->
+              <circle id="topo-p1" cx="240" cy="220" r="3.5" fill="#00D4FF" opacity="0.9">
+                <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.5s" repeatCount="indefinite" />
+              </circle>
+              <circle id="topo-p2" cx="450" cy="220" r="3.5" fill="#10B981" opacity="0.9">
+                <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.8s" repeatCount="indefinite" />
+              </circle>
+              <circle id="topo-p3" cx="320" cy="230" r="2.5" fill="#8B5CF6" opacity="0.6">
+                <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite" />
+              </circle>
+              <circle id="topo-p4" cx="530" cy="230" r="2.5" fill="#F59E0B" opacity="0.6">
+                <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.2s" repeatCount="indefinite" />
+              </circle>
+
+              <!-- ═══════ LAPTOP LAYER (RIGHT) ═══════ -->
+              <rect x="530" y="20" width="350" height="400" rx="16" fill="#080910" stroke="#10B981" stroke-width="1" opacity="0.4" class="topo-zone" />
+              <text x="705" y="46" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" letter-spacing="0.1em">LAPTOP DAEMON — THE HANDS</text>
+
+              <!-- Agent Orchestrator -->
+              <rect x="570" y="64" width="280" height="52" rx="10" fill="#0A0E18" stroke="#10B981" stroke-width="1.5" class="arch-node" />
+              <text x="710" y="86" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">Agent Orchestrator</text>
+              <text x="710" y="102" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6.5">Intent → Tool Selection → Execution → Verify</text>
+
+              <!-- Tool Row 1 -->
+              <rect x="555" y="132" width="82" height="44" rx="8" fill="#0C0D14" stroke="#10B981" stroke-width="0.8" />
+              <text x="596" y="150" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">FileSearch</text>
+              <text x="596" y="164" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="5.5">glob + ripgrep</text>
+
+              <rect x="649" y="132" width="82" height="44" rx="8" fill="#0C0D14" stroke="#10B981" stroke-width="0.8" />
+              <text x="690" y="150" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">Terminal</text>
+              <text x="690" y="164" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="5.5">node-pty</text>
+
+              <rect x="743" y="132" width="82" height="44" rx="8" fill="#0C0D14" stroke="#10B981" stroke-width="0.8" />
+              <text x="784" y="150" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">Git</text>
+              <text x="784" y="164" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="5.5">simple-git</text>
+
+              <!-- Tool Row 2 -->
+              <rect x="555" y="190" width="82" height="44" rx="8" fill="#0C0D14" stroke="#10B981" stroke-width="0.8" />
+              <text x="596" y="208" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">Patch</text>
+              <text x="596" y="222" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="5.5">fs + stash</text>
+
+              <rect x="649" y="190" width="82" height="44" rx="8" fill="#0C0D14" stroke="#10B981" stroke-width="0.8" />
+              <text x="690" y="208" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">TestRunner</text>
+              <text x="690" y="222" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="5.5">spawn + parse</text>
+
+              <rect x="743" y="190" width="82" height="44" rx="8" fill="#0C0D14" stroke="#10B981" stroke-width="0.8" />
+              <text x="784" y="208" text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7" font-weight="600">FileRead</text>
+              <text x="784" y="222" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="5.5">fs.readFile</text>
+
+              <!-- Orchestrator to tools arrows -->
+              <line x1="650" y1="116" x2="596" y2="132" stroke="#10B981" stroke-width="0.6" opacity="0.3" />
+              <line x1="710" y1="116" x2="690" y2="132" stroke="#10B981" stroke-width="0.6" opacity="0.3" />
+              <line x1="770" y1="116" x2="784" y2="132" stroke="#10B981" stroke-width="0.6" opacity="0.3" />
+
+              <!-- Cloud AI (OpenRouter) — conditional -->
+              <rect x="600" y="260" width="220" height="56" rx="10" fill="#0C0D14" stroke="#F59E0B" stroke-width="1.2" stroke-dasharray="4 3" class="arch-node" />
+              <text x="710" y="284" text-anchor="middle" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700">☁ OpenRouter API</text>
+              <text x="710" y="300" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6">Claude · GPT-4 · Gemini · 400+ models</text>
+              <text x="710" y="312" text-anchor="middle" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="5.5" opacity="0.5">ONLY WHEN ON-DEVICE INSUFFICIENT</text>
+
+              <!-- Conditional routing line -->
+              <path d="M 710 234 L 710 260" stroke="#F59E0B" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.4" />
+              <text x="726" y="250" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="5" opacity="0.4">if complex</text>
+
+              <!-- Results stream -->
+              <rect x="600" y="336" width="220" height="48" rx="10" fill="#0A0E18" stroke="#10B981" stroke-width="1" />
+              <text x="710" y="356" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700">Results Stream</text>
+              <text x="710" y="372" text-anchor="middle" fill="#475569" font-family="JetBrains Mono, monospace" font-size="6">progress · patch · test results · summary</text>
+
+              <!-- Flow labels -->
+              <text x="290" y="210" text-anchor="middle" fill="#00D4FF" font-family="JetBrains Mono, monospace" font-size="6" opacity="0.6">commands →</text>
+              <text x="290" y="250" text-anchor="middle" fill="#8B5CF6" font-family="JetBrains Mono, monospace" font-size="6" opacity="0.4">← results</text>
+              <text x="490" y="210" text-anchor="middle" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="6" opacity="0.6">execute →</text>
+              <text x="490" y="250" text-anchor="middle" fill="#F59E0B" font-family="JetBrains Mono, monospace" font-size="6" opacity="0.4">← stream</text>
+
+            </svg>
+          </div>
         </div>
       </div>
     </div>
@@ -163,18 +297,43 @@ import { architecture } from '../data/content';
 
   document.addEventListener('DOMContentLoaded', () => {
     // Animated data particles traveling between nodes
-    animate('#arch-particle-1', {
-      cx: [200, 310],
-      duration: 1500,
+    animate('#topo-p1', {
+      cx: [240, 316],
+      duration: 1400,
       ease: 'inOutSine',
       alternate: true,
       loop: true,
     });
 
-    animate('#arch-particle-2', {
-      cx: [490, 600],
+    animate('#topo-p2', {
+      cx: [450, 530],
+      duration: 1600,
+      ease: 'inOutSine',
+      alternate: true,
+      loop: true,
+    });
+
+    animate('#topo-p3', {
+      cx: [320, 244],
       duration: 1800,
       ease: 'inOutSine',
+      alternate: true,
+      loop: true,
+    });
+
+    animate('#topo-p4', {
+      cx: [530, 454],
+      duration: 2000,
+      ease: 'inOutSine',
+      alternate: true,
+      loop: true,
+    });
+
+    // Zone boundary breathing
+    animate('.topo-zone', {
+      opacity: [0.3, 0.5],
+      duration: 3000,
+      ease: 'inOutQuad',
       alternate: true,
       loop: true,
     });
@@ -182,7 +341,7 @@ import { architecture } from '../data/content';
     // Node breathing glow
     animate('.arch-node', {
       strokeOpacity: [0.6, 1],
-      duration: 2000,
+      duration: 2500,
       ease: 'inOutQuad',
       alternate: true,
       loop: true,
