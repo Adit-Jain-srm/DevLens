@@ -602,3 +602,74 @@ export const edgeCases = {
     { scenario: "Developer says \"undo\" after fix is applied", handling: "Git stash pop restores the pre-fix state. Session memory records: \"Reverted fix X — try different approach.\"" },
   ],
 };
+
+export const hackTrackerAlignment = {
+  eyebrow: "HACKTRACKER ALIGNMENT",
+  title: "Built to score. By design.",
+  subtitle: "HackTracker captures camera, voice, on-device AI, and Office Kit usage automatically. DevLens doesn't add these features for points — they ARE the product.",
+  scoring: [
+    {
+      criterion: "End Product Quality",
+      weight: "30%",
+      alignment: "Complete observe → fix → verify loop. Not a concept — a working tool a developer would keep using.",
+      score: "HIGH",
+      accent: "#00D4FF",
+    },
+    {
+      criterion: "Novelty & Impact",
+      weight: "20%",
+      alignment: "No existing tool combines phone camera + voice + on-device AI + laptop execution + verification. 10 peer-reviewed citations validate the approach.",
+      score: "HIGH",
+      accent: "#8B5CF6",
+    },
+    {
+      criterion: "Creative Phone Use",
+      weight: "15%",
+      alignment: "Camera, voice, and on-device AI are the CORE product — not add-ons. Every debugging session generates continuous HackTracker telemetry: camera frames, voice commands, Gemini Nano calls.",
+      score: "MAXIMUM",
+      accent: "#10B981",
+    },
+    {
+      criterion: "Technical Depth",
+      weight: "15%",
+      alignment: "Multi-layer architecture: on-device NPU inference, hybrid cloud routing, WebSocket bridge, agent orchestration with 6 tool types, session memory graph.",
+      score: "HIGH",
+      accent: "#F59E0B",
+    },
+    {
+      criterion: "Office Kit Usage",
+      weight: "10%",
+      alignment: "Office Kit is central to the architecture — clipboard sync (Copilot Bridge mode), screen mirror (Red Light phase), file transfer (context sharing), remote control (voice-to-keyboard).",
+      score: "MAXIMUM",
+      accent: "#EC4899",
+    },
+    {
+      criterion: "Demo & Presentation",
+      weight: "10%",
+      alignment: "5-act demo script: Problem → Visual Detection → Voice Fix → Architecture Drift → Close. Visually dramatic before/after in under 5 minutes.",
+      score: "HIGH",
+      accent: "#EF4444",
+    },
+  ],
+  redLightStrategy: {
+    title: "Red Light Phase Strategy",
+    subtitle: "During ~55% of the hackathon, laptops are restricted. DevLens thrives here.",
+    steps: [
+      "Phone camera captures errors from Office Kit screen mirror of laptop",
+      "On-device Gemini Nano processes and classifies (HackTracker registers this)",
+      "Phone sends commands to laptop via Office Kit clipboard/remote control",
+      "Results mirror back via Office Kit screen mirror",
+      "All interaction is phone-initiated — the phone IS the control surface",
+    ],
+  },
+  browniePoints: {
+    title: "Brownie Points: Local-First AI",
+    items: [
+      "Gemini Nano runs on Snapdragon NPU — zero cloud for perception",
+      "ML Kit OCR v2 — fully on-device, no network required",
+      "ML Kit Speech Recognition — on-device streaming transcription",
+      "Cloud AI (OpenRouter) only for complex multi-file reasoning",
+      "Mirrors Delhi 1st place winner's strategy: \"No cloud, no internet — pure local\"",
+    ],
+  },
+};
