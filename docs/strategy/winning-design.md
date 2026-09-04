@@ -193,6 +193,37 @@ The phone isn't a remote. It isn't a display. It's where decisions are made. The
 └──────────────────────────────────────────┘
 ```
 
+### 4.4 Advanced Capabilities (v2)
+
+These features extend the core loop with deeper repository intelligence and document-grounded compliance.
+
+**Code Graph & Blast-Radius Ranking**
+- Laptop: tree-sitter parses full repo → call graph, import graph, type graph
+- Graph serialized (~4-12 MB for 200k LOC) and synced to phone
+- Bounded traversal: 2.5M tokens → 1,500-3,000 per query
+- Every diff reordered by blast radius — riskiest changes surface first
+- Risk score: callers × severity × recency of last failure
+
+**Phone-First PR Review**
+- GitHub push event webhooks → phone receives diff
+- Code graph resolves diff to graph nodes
+- Gemini Nano generates per-hunk summaries on-device
+- Voice commands: approve, comment, request-changes
+- Draft PR for mechanical fixes (null checks, missing imports)
+
+**RAG Document Intelligence**
+- Upload from phone camera (OCR), phone files, laptop transfer, or URL
+- Supported: PDF, Markdown, Text, HTML, Word, Images
+- Locally indexed into vector store (never leaves machine)
+- Every fix validated against team docs before applying
+- Use cases: API compliance, style guide enforcement, security policies, migration guides
+
+**Gitflow-Aware Agent**
+- Understands branch conventions (main, develop, feature/*, hotfix/*)
+- Correlates errors with specific commits via git log
+- Auto-selects the correct branch for fixes
+- Stash safety: auto-stash before patches, auto-pop on revert
+
 ---
 
 ## 5. Technical Architecture

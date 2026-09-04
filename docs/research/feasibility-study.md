@@ -156,6 +156,8 @@ OkHttp WebSocket Client → Local Wi-Fi → Node.js WebSocket Server → node-pt
 | Terminal | node-pty | Execute shell commands |
 | TestRunner | child_process.spawn | Run test frameworks |
 | Git | simple-git | Status, diff, revert, log |
+| GraphBuilder | tree-sitter + custom | Parse repo into call/import/type graph |
+| RAGIndex | local vector store | Index uploaded docs for compliance checking |
 
 **Cloud AI (OpenRouter):**
 
@@ -222,6 +224,8 @@ Office Kit usage is tracked by HackTracker (10% of score). DevLens's core workfl
 | Test Runner + Verification | 1.5h |
 | Session Memory | 1.5h |
 | Office Kit / Copilot Bridge | 1h |
+| Code Graph (tree-sitter) | 2h |
+| Basic PR review flow | 1.5h |
 
 **P2 — Wow Feature (~2.5h)**
 
@@ -397,6 +401,8 @@ ML Kit OCR + Image Description confirmed on iQOO. No external hardware. LLM reas
 | On-device Gemini Nano | 80% (device-dependent) |
 | Office Kit Integration | 85% (built-in OS) |
 | Architecture Drift Detection | 85% (no external deps) |
+| Code Graph (tree-sitter) | 90% (proven library) |
+| RAG Document Pipeline | 85% (standard approach) |
 | Complete loop in 30 hours | 70% (achievable with prep) |
 
 **Verdict: BUILD IT.**

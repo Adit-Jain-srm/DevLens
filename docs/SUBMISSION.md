@@ -79,6 +79,15 @@ FIXED  (Laptop agent)   →  Search → Patch → Test → Verify → Report bac
 
 **With DevLens:** Point → Speak → Watch it fix → See it verified
 
+### Advanced Capabilities
+
+| Feature | Description |
+|---------|-------------|
+| **Code Graph & Blast Radius** | tree-sitter parses the repo into a call/import/type graph. Diffs ranked by impact — riskiest hunk first. 2.5M tokens → 1,500 per query. |
+| **Phone-First PR Review** | GitHub webhook diffs arrive on phone. Graph resolves to nodes, Gemini Nano summarizes each hunk, developer voice-approves. |
+| **RAG Document Intelligence** | Upload API docs, style guides, compliance specs (PDF, Markdown, images). Every fix validated against your team's standards. |
+| **Gitflow-Aware Agent** | Understands branch conventions. Correlates errors with commits. Fixes go to the right branch. |
+
 ---
 
 ## USP
@@ -113,6 +122,9 @@ Every existing AI dev tool puts intelligence in the cloud and the UI on a device
 6. **Architecture Drift Detection** — Whiteboard/drawing → code comparison. Validated by SeeRepo 2026: "visual representations improve fault localization."
 7. **Session Debugging Memory** — Remembers what was tried, what failed, what worked. Prevents repeated failures within a session.
 8. **Copilot Bridge Mode** — DevLens does not require developers to abandon their existing tools. Camera capture → on-device analysis → context-rich prompt generated → synced to laptop clipboard via Office Kit. Paste into Cursor, Claude Code, Copilot, or any tool. DevLens becomes the perception layer for the entire AI toolchain, not just its own agent.
+9. **Code Graph & Blast-Radius Ranking** — tree-sitter parses the repo into a call/import/type graph (~4-12 MB). Diffs reordered by risk. Bounded traversal: 2.5M tokens → 1,500-3,000 per query. Inspired by GLANCE's approach but taken further — we don't just review, we fix AND verify.
+10. **RAG-Powered Document Compliance** — Upload API specs, style guides, or compliance docs from phone or laptop (PDF, Markdown, images via OCR). DevLens indexes them locally and validates every generated fix against your team's rules before applying.
+11. **Phone-First PR Review** — GitHub push webhooks arrive on the phone. Code graph ranks hunks by blast radius. Gemini Nano summarizes on-device. Voice approve/comment/request-changes without a desk.
 
 ---
 
@@ -135,6 +147,7 @@ We have built and validated:
 - Feasibility study with component-level validation
 - Dependency verification (all APIs confirmed available on iQOO 15 + OriginOS 6)
 - Time-boxed build plan for 30 hours
+- Live demo website deployed on Vercel ([devlens-aj5.vercel.app](https://devlens-aj5.vercel.app))
 
 ### 30-Hour Build Plan
 
@@ -164,6 +177,8 @@ We have built and validated:
 | On-device AI (OCR + Speech + Nano) | Enterprise deployment |
 | Whiteboard → Architecture mapping | CI/CD integration |
 | Session memory (in-memory) | Persistent database |
+| Code graph (tree-sitter) + blast-radius ranking | Full RAG document pipeline |
+| Basic PR review via GitHub webhooks | Multi-repo graph construction |
 | Single demo project | Arbitrary repo support |
 
 ---
@@ -229,6 +244,8 @@ We have built and validated:
 - **Blast-radius ranking** — GLANCE-style diff ranking by impact (callers, dependents)
 - **Incident report generation** — one-tap summary of what broke, why, how it was fixed, and what to watch for
 - **VS Code extension** — receives DevLens commands, highlights affected files
+- **RAG document compliance** — upload team docs, validate fixes against standards
+- **Full PR review workflow** — webhook-driven, blast-radius ranked, voice-approved
 
 ### Phase 3: Team Platform (6+ Months)
 
@@ -471,7 +488,8 @@ This is not a checkbox feature — it is architecturally meaningful because deve
 
 | Resource | Link |
 |---|---|
-| GitHub Repository | *[To be created with scaffold]* |
+| GitHub Repository | [github.com/Adit-Jain-srm/DevLens](https://github.com/Adit-Jain-srm/DevLens) |
+| Live Demo Website | [devlens-aj5.vercel.app](https://devlens-aj5.vercel.app) |
 | Architecture Diagram | See [Architecture](#architecture) section above |
 | Feasibility Study | `docs/research/feasibility-study.md` |
 | Demo Video | *[To be recorded with MVP prototype]* |
@@ -488,6 +506,7 @@ This is not a checkbox feature — it is architecturally meaningful because deve
 5. **We have a story that sticks.** "Point. Speak. Fixed." — judges will remember which team we are.
 6. **We studied what wins.** The Delhi 1st place won with local-first execution. GLANCE won on writing quality and sharp technical insight. We incorporated both lessons.
 7. **We ship working components.** Unlike concept prototypes and README-only submissions, we will demonstrate real CameraX + ML Kit + WebSocket functionality.
+8. **We absorbed the competition's best ideas and went further.** GLANCE's graph-based token compression is brilliant — we incorporated blast-radius ranking. But we also fix the bug, verify the fix, and let you review PRs by voice.
 
 ---
 
