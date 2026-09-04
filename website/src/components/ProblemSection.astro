@@ -1,0 +1,72 @@
+---
+import { problem } from '../data/content';
+---
+
+<section id="problem" class="py-24 sm:py-32 bg-[#050508] border-b border-white/[0.06] relative overflow-hidden">
+  <div class="absolute inset-0 grid-subtle opacity-15 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section Header -->
+    <div class="text-center mb-16 scroll-reveal">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F43F5E]/10 border border-[#F43F5E]/30 text-xs font-mono text-[#F43F5E] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#F43F5E]"></span>
+        <span>{problem.eyebrow}</span>
+      </div>
+      <h2 class="display-section text-white tracking-tight">
+        {problem.title}
+      </h2>
+    </div>
+
+    <!-- Story -->
+    <div class="space-y-6 scroll-reveal-group">
+      {problem.story.map((paragraph, idx) => (
+        <p class={`scroll-reveal text-base sm:text-lg leading-relaxed ${idx === 0 ? 'text-zinc-300 font-medium' : 'text-zinc-400'}`}>
+          {paragraph}
+        </p>
+      ))}
+    </div>
+
+    <!-- Before / After -->
+    <div class="mt-16 grid md:grid-cols-2 gap-6 scroll-reveal">
+      <!-- Before -->
+      <div class="dl-card rounded-xl p-6 border-l-4 border-l-[#F43F5E]">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-[#F43F5E] text-lg">✗</span>
+          <span class="font-mono text-xs font-bold text-[#F43F5E] uppercase tracking-wider">Before DevLens</span>
+        </div>
+        <div class="font-mono text-xs text-zinc-400 space-y-1.5 leading-relaxed">
+          <p>Screenshot terminal → paste into chat</p>
+          <p>Copy browser console → explain context</p>
+          <p>Reference Slack thread → point to file</p>
+          <p>Type history → hope AI understands</p>
+          <p>Read suggestion → manually apply</p>
+          <p class="text-[#F43F5E] font-bold pt-2">⏱ 40+ minutes</p>
+        </div>
+      </div>
+
+      <!-- After -->
+      <div class="dl-card rounded-xl p-6 border-l-4 border-l-[#10B981]">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-[#10B981] text-lg">✓</span>
+          <span class="font-mono text-xs font-bold text-[#10B981] uppercase tracking-wider">With DevLens</span>
+        </div>
+        <div class="font-mono text-xs text-zinc-400 space-y-1.5 leading-relaxed">
+          <p>Point phone at terminal</p>
+          <p>"Fix this"</p>
+          <p>Agent finds renamed path in git diff</p>
+          <p>Patches three route handlers</p>
+          <p>Runs tests: 12 passing</p>
+          <p class="text-[#10B981] font-bold pt-2">⏱ Under 30 seconds</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insight -->
+    <div class="mt-12 text-center scroll-reveal">
+      <blockquote class="text-lg sm:text-xl text-white font-medium italic leading-relaxed max-w-2xl mx-auto">
+        "{problem.insight}"
+      </blockquote>
+    </div>
+  </div>
+</section>

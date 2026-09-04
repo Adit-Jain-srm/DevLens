@@ -1,0 +1,46 @@
+---
+import { techStack } from '../data/content';
+---
+
+<section class="py-24 sm:py-32 bg-[#0A0A0F] border-b border-white/[0.06] relative overflow-hidden">
+  <div class="absolute inset-0 grid-dense opacity-10 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.06] border border-white/10 text-xs font-mono text-zinc-400 mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+        <span>{techStack.eyebrow}</span>
+      </div>
+      <h2 class="display-section text-white tracking-tight">
+        {techStack.title}
+      </h2>
+    </div>
+
+    <!-- Stack Layers -->
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto scroll-reveal-group">
+      {techStack.layers.map((layer) => (
+        <div class="dl-card rounded-xl p-6 scroll-reveal">
+          <div class="flex items-center justify-between mb-5 pb-4 border-b border-white/[0.06]">
+            <h3 class="font-heading font-bold text-white text-base">{layer.name}</h3>
+            <span
+              class="px-2 py-0.5 rounded text-[9px] font-mono font-bold tracking-wider"
+              style={`color: ${layer.accent}; background: ${layer.accent}15; border: 1px solid ${layer.accent}30`}
+            >
+              {layer.badge}
+            </span>
+          </div>
+          <ul class="space-y-2.5">
+            {layer.technologies.map((tech) => (
+              <li class="flex items-center gap-2 text-xs text-zinc-400">
+                <span class="w-1 h-1 rounded-full shrink-0" style={`background: ${layer.accent}`}></span>
+                <span class="font-mono">{tech}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

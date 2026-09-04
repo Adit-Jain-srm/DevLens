@@ -1,0 +1,297 @@
+---
+import { howItWorks } from '../data/content';
+---
+
+<section id="how-it-works" class="py-24 sm:py-32 bg-[#0A0A0F] border-b border-white/[0.06] relative overflow-hidden">
+  <div class="absolute inset-0 grid-dense opacity-15 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#00D4FF]/10 border border-[#00D4FF]/30 text-xs font-mono text-[#00D4FF] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#00D4FF] animate-ping"></span>
+        <span>{howItWorks.eyebrow}</span>
+      </div>
+      <h2 class="display-section text-white tracking-tight">
+        {howItWorks.title}
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-zinc-400 leading-relaxed">
+        {howItWorks.subtitle}
+      </p>
+    </div>
+
+    <!-- Interactive Simulator -->
+    <div class="max-w-5xl mx-auto rounded-2xl bg-black border border-white/[0.1] shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden scroll-reveal">
+
+      <!-- Top Bar -->
+      <div class="p-4 sm:p-5 bg-[#0A0B14] border-b border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="flex gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+          </div>
+          <span class="font-mono text-xs text-zinc-300 font-semibold pl-2 border-l border-white/10">
+            DEVLENS // LIVE SIMULATION
+          </span>
+        </div>
+        <button
+          id="sim-autoplay-btn"
+          class="magnetic-btn px-4 py-2 rounded-lg font-mono text-xs font-bold bg-[#00D4FF] text-black hover:bg-[#33E0FF] transition-all flex items-center gap-2 cursor-pointer shadow-[0_0_15px_rgba(0,212,255,0.3)] hover:shadow-[0_0_25px_rgba(0,212,255,0.5)]"
+        >
+          <svg id="sim-btn-icon" class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <span id="sim-btn-label">AUTO-PLAY FULL LOOP</span>
+        </button>
+      </div>
+
+      <!-- Step Progress Bar -->
+      <div class="step-progress mx-4 sm:mx-5">
+        <div id="sim-progress-fill" class="step-progress-fill" style="width: 33%"></div>
+      </div>
+
+      <!-- Step Tabs -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 border-b border-white/[0.08] bg-[#070810]">
+        {howItWorks.steps.map((step, idx) => (
+          <button
+            data-sim-step={idx}
+            class={`min-h-[56px] py-4 px-5 text-left transition-all duration-300 border-b sm:border-b-0 sm:border-r last:border-r-0 last:border-b-0 border-white/[0.08] cursor-pointer flex flex-col gap-1 ${
+              idx === 0
+                ? 'bg-[#00D4FF]/10 text-white sm:border-b-2 border-[#00D4FF]'
+                : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]'
+            }`}
+          >
+            <div class="flex items-center justify-between text-[10px] font-mono w-full">
+              <span class={`font-bold ${idx === 0 ? 'text-[#00D4FF]' : ''}`}>{step.phase}</span>
+              <span class="font-bold text-zinc-500">{step.duration}</span>
+            </div>
+            <div class="text-xs sm:text-sm font-heading font-bold text-zinc-200">
+              {step.title}
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <!-- Main Stage -->
+      <div class="p-6 sm:p-8 bg-[#050509]">
+
+        <!-- Step Info Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 mb-6 border-b border-white/[0.06]">
+          <div>
+            <span id="sim-node" class="text-[11px] font-mono font-bold text-[#00D4FF] uppercase tracking-wider block mb-1">
+              {howItWorks.steps[0].node}
+            </span>
+            <h3 id="sim-title" class="text-lg sm:text-xl font-bold font-heading text-white">
+              {howItWorks.steps[0].title}
+            </h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="sim-status-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="sim-status" class="font-mono text-xs text-emerald-400 font-semibold px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 transition-all duration-300">
+              {howItWorks.steps[0].telemetry.status}
+            </span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p id="sim-desc" class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 transition-all duration-300">
+          {howItWorks.steps[0].description}
+        </p>
+
+        <!-- Code & Telemetry -->
+        <div class="grid lg:grid-cols-3 gap-6">
+
+          <!-- Terminal -->
+          <div class="lg:col-span-2 rounded-xl bg-black border border-white/[0.08] p-4 sm:p-5 font-mono text-xs overflow-x-auto shadow-inner relative scanline">
+            <div class="flex items-center justify-between text-[10px] text-zinc-500 pb-2 mb-3 border-b border-white/[0.06]">
+              <span>EXECUTION LOG</span>
+              <div class="flex items-center gap-2">
+                <span id="sim-code-label" class="text-[#00D4FF]">ML_KIT_STREAM</span>
+                <span id="sim-line-count" class="text-zinc-600">6 lines</span>
+              </div>
+            </div>
+            <pre id="sim-code" class="text-[#00D4FF] leading-relaxed whitespace-pre-wrap font-mono min-h-[120px]"><code>{howItWorks.steps[0].codeSnippet}</code></pre>
+          </div>
+
+          <!-- Telemetry -->
+          <div class="rounded-xl bg-[#090A10] border border-white/[0.08] p-5 flex flex-col justify-between space-y-4">
+            <div class="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-wider pb-2 border-b border-white/[0.06]">
+              TELEMETRY
+            </div>
+            <div class="space-y-3 font-mono text-xs">
+              <div class="flex items-center justify-between group">
+                <span class="text-zinc-500">Latency:</span>
+                <span id="sim-latency" class="font-bold text-white transition-all duration-300">{howItWorks.steps[0].telemetry.latency}</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-zinc-500">Model:</span>
+                <span id="sim-model" class="font-bold text-[#00D4FF] transition-all duration-300">{howItWorks.steps[0].telemetry.model}</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-zinc-500">Privacy:</span>
+                <span id="sim-privacy" class="font-bold text-emerald-400 transition-all duration-300">{howItWorks.steps[0].telemetry.privacy}</span>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-white/[0.06] text-[10px] font-mono text-zinc-500">
+              <span id="sim-footer-note">✓ Verified execution · Zero cloud leakage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animate } from 'animejs';
+  import { howItWorks } from '../data/content';
+  const steps = howItWorks.steps;
+
+  let currentIdx = 0;
+  let autoTimer: ReturnType<typeof setInterval> | null = null;
+
+  const tabBtns = document.querySelectorAll('[data-sim-step]');
+  const autoBtn = document.getElementById('sim-autoplay-btn');
+  const btnLabel = document.getElementById('sim-btn-label');
+  const btnIcon = document.getElementById('sim-btn-icon');
+  const progressFill = document.getElementById('sim-progress-fill');
+
+  const nodeEl = document.getElementById('sim-node');
+  const titleEl = document.getElementById('sim-title');
+  const statusEl = document.getElementById('sim-status');
+  const statusDot = document.getElementById('sim-status-dot');
+  const descEl = document.getElementById('sim-desc');
+  const codeEl = document.getElementById('sim-code');
+  const codeLabelEl = document.getElementById('sim-code-label');
+  const lineCountEl = document.getElementById('sim-line-count');
+  const latencyEl = document.getElementById('sim-latency');
+  const modelEl = document.getElementById('sim-model');
+  const privacyEl = document.getElementById('sim-privacy');
+
+  const codeLabels = ['ML_KIT_STREAM', 'SPEECH_INTENT_LOG', 'AGENT_EXECUTION_LOG'];
+  const accentColors = ['#00D4FF', '#8B5CF6', '#10B981'];
+  const statusColors = [
+    { bg: 'bg-cyan-500/10', border: 'border-cyan-500/20', text: 'text-cyan-400', dot: 'bg-cyan-400' },
+    { bg: 'bg-purple-500/10', border: 'border-purple-500/20', text: 'text-purple-400', dot: 'bg-purple-400' },
+    { bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', text: 'text-emerald-400', dot: 'bg-emerald-400' },
+  ];
+
+  let activeTypewriterInterval: ReturnType<typeof setInterval> | null = null;
+
+  function renderStep(idx: number) {
+    currentIdx = idx;
+    const step = steps[idx];
+    const sc = statusColors[idx];
+
+    // Tab highlight — Tailwind can't use dynamic color in class names at runtime,
+    // so we apply active styles via inline style + fixed utility classes.
+    tabBtns.forEach((btn, i) => {
+      const isActive = i === idx;
+      const el = btn as HTMLElement;
+      if (isActive) {
+        el.className = 'min-h-[56px] py-4 px-5 text-left transition-all duration-300 border-b sm:border-b-0 sm:border-r last:border-r-0 last:border-b-0 border-white/[0.08] cursor-pointer flex flex-col gap-1 text-white sm:border-b-2';
+        el.style.borderColor = accentColors[idx];
+        el.style.backgroundColor = `${accentColors[idx]}1a`;
+      } else {
+        el.className = 'min-h-[56px] py-4 px-5 text-left transition-all duration-300 border-b sm:border-b-0 sm:border-r last:border-r-0 last:border-b-0 border-white/[0.08] cursor-pointer flex flex-col gap-1 text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]';
+        el.style.borderColor = '';
+        el.style.backgroundColor = '';
+      }
+    });
+
+    // Progress bar
+    if (progressFill) {
+      const pct = ((idx + 1) / steps.length) * 100;
+      progressFill.style.width = `${pct}%`;
+    }
+
+    // Text content (with fade)
+    const fadeTargets = [nodeEl, titleEl, descEl];
+    fadeTargets.forEach((el) => {
+      if (el) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+      }
+    });
+
+    setTimeout(() => {
+      if (nodeEl) { nodeEl.textContent = step.node; nodeEl.style.color = accentColors[idx]; }
+      if (titleEl) titleEl.textContent = step.title;
+      if (descEl) descEl.textContent = step.description;
+      if (codeLabelEl) { codeLabelEl.textContent = codeLabels[idx] || ''; codeLabelEl.style.color = accentColors[idx]; }
+      if (latencyEl) latencyEl.textContent = step.telemetry.latency;
+      if (modelEl) { modelEl.textContent = step.telemetry.model; modelEl.style.color = accentColors[idx]; }
+      if (privacyEl) privacyEl.textContent = step.telemetry.privacy;
+
+      if (statusEl) {
+        statusEl.textContent = step.telemetry.status;
+        statusEl.className = `font-mono text-xs font-semibold px-2.5 py-1 rounded ${sc.bg} ${sc.border} ${sc.text} border transition-all duration-300`;
+      }
+      if (statusDot) statusDot.className = `w-2 h-2 rounded-full ${sc.dot} animate-pulse`;
+
+      fadeTargets.forEach((el) => {
+        if (el) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+          el.style.transition = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        }
+      });
+    }, 150);
+
+    // Line count
+    const lineCount = step.codeSnippet.split('\n').length;
+    if (lineCountEl) lineCountEl.textContent = `${lineCount} lines`;
+
+    // Typewriter terminal — clear any previous interval first
+    if (activeTypewriterInterval) {
+      clearInterval(activeTypewriterInterval);
+      activeTypewriterInterval = null;
+    }
+    if (codeEl) {
+      codeEl.textContent = '';
+      codeEl.style.color = accentColors[idx];
+      const text = step.codeSnippet;
+      let charIdx = 0;
+      const speed = idx === 2 ? 4 : 6;
+      activeTypewriterInterval = setInterval(() => {
+        if (charIdx < text.length) {
+          codeEl.textContent += text[charIdx];
+          charIdx++;
+        } else {
+          clearInterval(activeTypewriterInterval!);
+          activeTypewriterInterval = null;
+        }
+      }, speed);
+    }
+  }
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      if (btnLabel) btnLabel.textContent = 'AUTO-PLAY FULL LOOP';
+      if (btnIcon) btnIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+      const idx = parseInt(btn.getAttribute('data-sim-step') || '0', 10);
+      renderStep(idx);
+    });
+  });
+
+  if (autoBtn) {
+    autoBtn.addEventListener('click', () => {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+        if (btnLabel) btnLabel.textContent = 'AUTO-PLAY FULL LOOP';
+        if (btnIcon) btnIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+      } else {
+        if (btnLabel) btnLabel.textContent = 'PAUSE';
+        if (btnIcon) btnIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>';
+        let nextIdx = (currentIdx + 1) % steps.length;
+        renderStep(nextIdx);
+        autoTimer = setInterval(() => {
+          nextIdx = (nextIdx + 1) % steps.length;
+          renderStep(nextIdx);
+        }, 5000);
+      }
+    });
+  }
+</script>

@@ -27,6 +27,10 @@ local.properties
 .DS_Store
 Thumbs.db
 
+# Build output
+dist/
+.astro/
+
 # Competitor analysis (cloned repos, not tracked)
 .competitor-analysis/
 .cursor/

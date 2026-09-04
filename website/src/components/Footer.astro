@@ -1,0 +1,41 @@
+---
+import { site } from '../data/content';
+---
+
+<footer class="py-16 bg-[#050508] border-t border-white/[0.06]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+
+      <div class="flex flex-col items-center md:items-start gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00D4FF] to-[#8B5CF6] flex items-center justify-center text-black font-mono font-bold text-sm">
+            D
+          </div>
+          <span class="font-heading font-bold text-white text-lg tracking-tight">DevLens</span>
+        </div>
+        <p class="text-sm text-zinc-500 font-mono">{site.tagline}</p>
+      </div>
+
+      <div class="flex flex-col items-center md:items-end gap-3 text-sm text-zinc-500">
+        <div class="flex items-center gap-2 font-mono text-xs">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#00D4FF]"></span>
+          <span>{site.teamName}</span>
+          <span class="text-zinc-700">·</span>
+          <span>{site.hackathon}</span>
+          <span class="text-zinc-700">·</span>
+          <span>{site.event}</span>
+        </div>
+        <p class="text-xs text-zinc-600">
+          Built with 🔥 for the {site.track}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-white/[0.04] text-center">
+      <p class="text-xs text-zinc-600 font-mono">
+        © 2026 {site.teamName}. The first developer tool with eyes and ears.
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,77 @@
+---
+import { features, wowFeature } from '../data/content';
+---
+
+<section id="features" class="py-24 sm:py-32 bg-[#0A0A0F] border-b border-white/[0.06] relative overflow-hidden">
+  <div class="absolute inset-0 grid-dense opacity-10 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#10B981]/10 border border-[#10B981]/30 text-xs font-mono text-[#10B981] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+        <span>{features.eyebrow}</span>
+      </div>
+      <h2 class="display-section text-white tracking-tight">
+        {features.title}
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-zinc-400 leading-relaxed">
+        {features.subtitle}
+      </p>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto mb-20 scroll-reveal-group">
+      {features.items.map((feature) => (
+        <div class="dl-card rounded-xl p-6 scroll-reveal">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-2xl">{feature.icon}</span>
+            <span
+              class="px-2 py-0.5 rounded text-[9px] font-mono font-bold tracking-wider border"
+              style={`color: ${feature.accent}; border-color: ${feature.accent}40; background: ${feature.accent}10`}
+            >
+              {feature.badge}
+            </span>
+          </div>
+          <h3 class="font-heading font-bold text-white text-base mb-2">{feature.title}</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Wow Feature (Full Width) -->
+    <div class="max-w-4xl mx-auto scroll-reveal">
+      <div class="dl-card rounded-2xl p-8 sm:p-10 dl-card-active relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-[#EF4444]/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EF4444]/10 border border-[#EF4444]/30 text-xs font-mono text-[#EF4444] mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#EF4444] animate-pulse"></span>
+            <span>{wowFeature.eyebrow}</span>
+          </div>
+
+          <h3 class="display-lg text-white mb-3">
+            {wowFeature.title}
+          </h3>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-8 max-w-2xl">
+            {wowFeature.subtitle}
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            {wowFeature.steps.map((step, idx) => (
+              <div class="flex items-start gap-3 p-4 rounded-xl bg-black/40 border border-white/[0.06]">
+                <div
+                  class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 font-mono text-sm font-bold"
+                  style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3);"
+                >
+                  {idx + 1}
+                </div>
+                <p class="text-xs text-zinc-300 leading-relaxed pt-1.5">{step}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+import { modes } from '../data/content';
+---
+
+<section class="py-24 sm:py-32 bg-[#0A0A0F] border-b border-white/[0.06] relative overflow-hidden">
+  <div class="absolute inset-0 grid-dense opacity-10 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EC4899]/10 border border-[#EC4899]/30 text-xs font-mono text-[#EC4899] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#EC4899]"></span>
+        <span>{modes.eyebrow}</span>
+      </div>
+      <h2 class="display-section text-white tracking-tight">
+        {modes.title}
+      </h2>
+    </div>
+
+    <!-- Mode Cards -->
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto scroll-reveal-group">
+      {modes.items.map((mode, idx) => (
+        <div class="dl-card rounded-xl p-6 scroll-reveal relative">
+          <div class="flex items-center justify-between mb-5">
+            <span class="text-3xl">{mode.icon}</span>
+            <span
+              class="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider"
+              style={`color: ${mode.accent}; background: ${mode.accent}15; border: 1px solid ${mode.accent}30`}
+            >
+              {mode.complexity.toUpperCase()}
+            </span>
+          </div>
+
+          <h3 class="font-heading font-bold text-white text-lg mb-3">{mode.name}</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">{mode.description}</p>
+
+          {/* Progressive arrow */}
+          {idx < modes.items.length - 1 && (
+            <div class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20">
+              <svg class="w-6 h-6 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

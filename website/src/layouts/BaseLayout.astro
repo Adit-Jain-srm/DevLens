@@ -1,0 +1,168 @@
+---
+import '../styles/global.css';
+import { site } from '../data/content';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth bg-[#0A0A0F] text-[#E2E8F0]">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen bg-[#0A0A0F] text-[#E2E8F0] antialiased flex flex-col overflow-x-hidden font-sans">
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Cursor Glow -->
+    <div id="cursor-glow"></div>
+
+    <slot />
+
+    <script>
+      import { animate } from 'animejs';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // ═══ Scroll Reveal (anime.js) ═══
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target as HTMLElement;
+              observer.unobserve(el);
+
+              if (el.classList.contains('scroll-reveal-group')) {
+                const items = el.querySelectorAll('.scroll-reveal');
+                if (items.length > 0) {
+                  animate(items, {
+                    opacity: [0, 1],
+                    translateY: [32, 0],
+                    duration: 800,
+                    delay: (_el: any, i: number) => i * 100,
+                    ease: 'outExpo',
+                  });
+                }
+              } else {
+                animate(el, {
+                  opacity: [0, 1],
+                  translateY: [32, 0],
+                  duration: 800,
+                  ease: 'outExpo',
+                });
+              }
+            }
+          });
+        }, {
+          threshold: 0.08,
+          rootMargin: '0px 0px -60px 0px',
+        });
+
+        document.querySelectorAll('.scroll-reveal, .scroll-reveal-group').forEach((el) => {
+          observer.observe(el);
+        });
+
+        // ═══ Scroll Progress Bar ═══
+        const progressBar = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+          if (!progressBar) return;
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          progressBar.style.width = `${progress}%`;
+        }, { passive: true });
+
+        // ═══ Active Nav Highlighting ═══
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              navLinks.forEach((link) => {
+                const href = link.getAttribute('href');
+                if (href === `#${id}`) {
+                  link.classList.add('active');
+                } else {
+                  link.classList.remove('active');
+                }
+              });
+            }
+          });
+        }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+
+        sections.forEach((section) => navObserver.observe(section));
+
+        // ═══ Cursor Glow Follow ═══
+        const glow = document.getElementById('cursor-glow');
+        if (glow) {
+          document.addEventListener('mousemove', (e) => {
+            glow.style.left = `${e.clientX}px`;
+            glow.style.top = `${e.clientY}px`;
+          }, { passive: true });
+        }
+
+        // ═══ Card Mouse Tracking (spotlight effect) ═══
+        document.querySelectorAll('.dl-card').forEach((card) => {
+          card.addEventListener('mousemove', (e: any) => {
+            const rect = (card as HTMLElement).getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            (card as HTMLElement).style.setProperty('--mouse-x', `${x}%`);
+            (card as HTMLElement).style.setProperty('--mouse-y', `${y}%`);
+          });
+        });
+
+        // ═══ Floating Particles in Hero ═══
+        const particleContainer = document.getElementById('hero-particles');
+        if (particleContainer) {
+          for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = `${Math.random() * 100}%`;
+            p.style.top = `${Math.random() * 100}%`;
+            const size = Math.random() * 3 + 1;
+            p.style.width = `${size}px`;
+            p.style.height = `${size}px`;
+            const colors = ['#00D4FF', '#8B5CF6', '#10B981'];
+            p.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particleContainer.appendChild(p);
+
+            animate(p, {
+              translateY: [0, -(Math.random() * 120 + 40)],
+              translateX: [0, (Math.random() - 0.5) * 60],
+              opacity: [0, Math.random() * 0.6 + 0.2, 0],
+              duration: Math.random() * 5000 + 4000,
+              delay: Math.random() * 3000,
+              ease: 'linear',
+              loop: true,
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

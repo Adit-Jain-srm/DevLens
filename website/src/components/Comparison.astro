@@ -1,0 +1,78 @@
+---
+import { comparison } from '../data/content';
+---
+
+<section id="comparison" class="py-24 sm:py-32 bg-[#050508] border-b border-white/[0.06] relative overflow-hidden">
+  <div class="absolute inset-0 grid-subtle opacity-15 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-xs font-mono text-[#F59E0B] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>
+        <span>{comparison.eyebrow}</span>
+      </div>
+      <h2 class="display-section text-white tracking-tight">
+        {comparison.title}
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-zinc-400 leading-relaxed">
+        {comparison.subtitle}
+      </p>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="max-w-5xl mx-auto scroll-reveal">
+      <div class="dl-card rounded-2xl overflow-hidden">
+
+        <!-- Table Header -->
+        <div class="hidden md:grid grid-cols-5 bg-[#0A0B14] border-b border-white/[0.08] text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
+          <div class="p-4 border-r border-white/[0.06]">Dimension</div>
+          <div class="p-4 border-r border-white/[0.06] text-[#00D4FF] flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00D4FF] animate-pulse"></span>
+            DevLens
+          </div>
+          <div class="p-4 border-r border-white/[0.06]">Cursor</div>
+          <div class="p-4 border-r border-white/[0.06]">Devin</div>
+          <div class="p-4">Claude Code</div>
+        </div>
+
+        <!-- Table Rows -->
+        {comparison.rows.map((row, idx) => (
+          <div class={`comparison-row md:grid grid-cols-5 border-b border-white/[0.06] last:border-b-0 transition-all duration-200 ${idx % 2 === 0 ? 'bg-[#0C0D14]' : 'bg-[#090A10]'}`}>
+            <div class="p-4 border-b md:border-b-0 md:border-r border-white/[0.06]">
+              <div class="font-mono text-xs font-bold text-zinc-300">{row.dimension}</div>
+              {(row as any).evidence && (
+                <div class="font-mono text-[9px] text-zinc-600 mt-1">📄 {(row as any).evidence}</div>
+              )}
+            </div>
+            <div class="p-4 border-b md:border-b-0 md:border-r border-white/[0.06] bg-[#00D4FF]/[0.02]">
+              <span class="md:hidden font-mono text-[9px] text-[#00D4FF] font-bold uppercase block mb-1">DevLens</span>
+              <span class="dl-highlight text-xs text-[#00D4FF] font-semibold transition-all duration-200">{row.devlens}</span>
+            </div>
+            <div class="p-4 border-b md:border-b-0 md:border-r border-white/[0.06]">
+              <span class="md:hidden font-mono text-[9px] text-zinc-500 font-bold uppercase block mb-1">Cursor</span>
+              <span class="text-xs text-zinc-500">{row.cursor}</span>
+            </div>
+            <div class="p-4 border-b md:border-b-0 md:border-r border-white/[0.06]">
+              <span class="md:hidden font-mono text-[9px] text-zinc-500 font-bold uppercase block mb-1">Devin</span>
+              <span class="text-xs text-zinc-500">{row.devin}</span>
+            </div>
+            <div class="p-4">
+              <span class="md:hidden font-mono text-[9px] text-zinc-500 font-bold uppercase block mb-1">Claude Code</span>
+              <span class="text-xs text-zinc-500">{row.claudeCode}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Score Summary -->
+      <div class="mt-6 flex items-center justify-center gap-6 text-xs font-mono text-zinc-500">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-sm bg-[#00D4FF]/20 border border-[#00D4FF]/30"></span>
+          <span>DevLens leads in all 6 dimensions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

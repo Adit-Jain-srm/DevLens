@@ -1,0 +1,73 @@
+---
+import { guardrails, edgeCases } from '../data/content';
+---
+
+<section id="guardrails" class="py-24 sm:py-32 bg-[#0A0A0F] border-b border-white/[0.06] relative overflow-hidden">
+  <div class="absolute inset-0 grid-dense opacity-10 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#10B981]/10 border border-[#10B981]/30 text-xs font-mono text-[#10B981] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+        <span>{guardrails.eyebrow}</span>
+      </div>
+      <h2 class="display-section text-white tracking-tight">
+        {guardrails.title}
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-zinc-400 leading-relaxed">
+        {guardrails.subtitle}
+      </p>
+    </div>
+
+    <!-- Guardrail Cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto mb-20 scroll-reveal-group">
+      {guardrails.items.map((item) => (
+        <div class="dl-card rounded-xl p-6 scroll-reveal group">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-2xl transition-transform duration-300 group-hover:scale-110">{item.icon}</span>
+            <div class="w-8 h-8 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center">
+              <svg class="w-4 h-4 text-[#10B981]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="font-heading font-bold text-white text-sm mb-2">{item.title}</h3>
+          <p class="text-xs text-zinc-400 leading-relaxed">{item.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Edge Cases -->
+    <div class="max-w-4xl mx-auto scroll-reveal">
+      <div class="dl-card rounded-2xl p-6 sm:p-8">
+        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/[0.06]">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-xs font-mono text-[#F59E0B]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>
+            <span>{edgeCases.eyebrow}</span>
+          </div>
+          <h3 class="font-heading font-bold text-white text-base">{edgeCases.title}</h3>
+        </div>
+
+        <div class="space-y-4">
+          {edgeCases.items.map((item, idx) => (
+            <details class="group/edge">
+              <summary class="flex items-start gap-3 cursor-pointer py-2 text-sm text-zinc-300 hover:text-white transition-colors duration-200 list-none">
+                <div class="w-6 h-6 rounded-md bg-[#F59E0B]/10 border border-[#F59E0B]/20 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-3 h-3 text-[#F59E0B] transition-transform duration-200 group-open/edge:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </div>
+                <span class="font-medium">{item.scenario}</span>
+              </summary>
+              <div class="ml-9 mt-1 mb-3 text-xs text-zinc-500 leading-relaxed pl-0.5 border-l-2 border-[#F59E0B]/20 pl-3">
+                {item.handling}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

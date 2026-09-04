@@ -1,0 +1,70 @@
+---
+import { research } from '../data/content';
+---
+
+<section class="py-24 sm:py-32 bg-[#050508] border-b border-white/[0.06] relative overflow-hidden">
+  <div class="absolute inset-0 grid-subtle opacity-10 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-6 scroll-reveal">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#06B6D4]/10 border border-[#06B6D4]/30 text-xs font-mono text-[#06B6D4] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#06B6D4]"></span>
+        <span>{research.eyebrow}</span>
+      </div>
+      <h2 class="display-section text-white tracking-tight">
+        {research.title}
+      </h2>
+    </div>
+
+    <!-- Subtitle with paper count -->
+    <div class="text-center mb-14 scroll-reveal">
+      <p class="text-sm text-zinc-400 max-w-xl mx-auto">
+        Every architectural decision backed by peer-reviewed 2026 research. 10 citations. Zero hand-waving.
+      </p>
+    </div>
+
+    <!-- Citations Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto scroll-reveal-group">
+      {research.citations.map((cite: any) => (
+        <div class="dl-card rounded-xl p-5 scroll-reveal group gradient-border">
+          <!-- Metric Badge -->
+          {cite.metric && (
+            <div class="flex items-center justify-between mb-3 pb-3 border-b border-white/[0.06]">
+              <a href={(cite as any).url} target="_blank" rel="noopener" class="font-mono text-[10px] font-bold text-[#06B6D4] uppercase tracking-wider hover:underline underline-offset-2 transition-colors">
+                {cite.source} ↗
+              </a>
+              <span class="font-mono text-lg font-bold text-white group-hover:text-[#06B6D4] transition-colors duration-300">
+                {cite.metric}
+              </span>
+            </div>
+          )}
+          {!cite.metric && (
+            <a href={(cite as any).url} target="_blank" rel="noopener" class="block font-mono text-[10px] font-bold text-[#06B6D4] uppercase tracking-wider mb-3 pb-3 border-b border-white/[0.06] hover:underline underline-offset-2">
+              {cite.source} ↗
+            </a>
+          )}
+
+          <!-- Finding -->
+          <blockquote class="text-[13px] text-zinc-300 font-medium leading-relaxed mb-3 italic">
+            "{cite.finding}"
+          </blockquote>
+
+          <!-- Implication -->
+          <p class="text-[11px] text-zinc-500 leading-relaxed">
+            → {cite.implication}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom callout -->
+    <div class="mt-10 text-center scroll-reveal">
+      <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-zinc-400">
+        <span class="text-[#06B6D4]">📄</span>
+        <span>Sources: ACM, arXiv, NOFire, GitHub Issues, UC Irvine — all 2026</span>
+      </div>
+    </div>
+  </div>
+</section>

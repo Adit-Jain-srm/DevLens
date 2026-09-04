@@ -1,0 +1,230 @@
+---
+import { hero, site } from '../data/content';
+---
+
+<section class="relative min-h-screen pt-24 pb-20 sm:pt-28 sm:pb-28 bg-[#0A0A0F] overflow-hidden flex flex-col justify-center border-b border-white/[0.06]">
+  <div class="absolute inset-0 hero-mesh pointer-events-none opacity-90"></div>
+  <div class="absolute inset-0 grid-subtle opacity-25 pointer-events-none"></div>
+  <div id="hero-particles" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+
+    <!-- Badge -->
+    <div class="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono text-zinc-400 mb-8 backdrop-blur-md shimmer">
+      <span class="w-2 h-2 rounded-full bg-[#00D4FF] animate-pulse"></span>
+      <span class="font-bold text-white tracking-wide">{site.teamName.toUpperCase()}</span>
+      <span class="text-zinc-600">·</span>
+      <span>{site.hackathon}</span>
+      <span class="text-zinc-600">·</span>
+      <span class="px-2 py-0.5 rounded bg-[#00D4FF]/10 text-[#00D4FF] border border-[#00D4FF]/30 font-bold text-[10px] tracking-wider uppercase">
+        {site.track}
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <div class="max-w-4xl mx-auto mb-10">
+      <h1 class="display-hero text-white tracking-tight">
+        <span class="hero-text-reveal inline-block">Point. Speak.</span>
+        <span class="block text-gradient-cyan mt-1 glow-text hero-text-reveal inline-block" style="animation-delay: 0.2s">Fixed.</span>
+      </h1>
+
+      <p class="mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-3xl mx-auto leading-relaxed hero-text-reveal" style="animation-delay: 0.4s">
+        {hero.subtitle}
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4 hero-text-reveal" style="animation-delay: 0.6s">
+        <a
+          href="#how-it-works"
+          class="magnetic-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-mono text-sm font-bold bg-white text-black hover:bg-zinc-100 transition-all shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_16px_-4px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_20px_-2px_rgba(0,212,255,0.3)]"
+        >
+          <svg class="w-4 h-4 fill-black" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <span>See It In Action</span>
+        </a>
+        <a
+          href="#architecture"
+          class="magnetic-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-mono text-sm font-semibold bg-[#0C0D14] text-zinc-300 border border-white/10 hover:border-[#00D4FF]/30 hover:text-white transition-all"
+        >
+          <span>Explore Architecture</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Animated Phone Mockup -->
+    <div class="relative max-w-sm mx-auto my-12 hero-text-reveal" style="animation-delay: 0.8s">
+      <div class="relative rounded-[2.5rem] border-4 border-zinc-700/60 bg-[#0A0A0F] p-4 phone-glow">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#0A0A0F] rounded-b-2xl border-b border-l border-r border-zinc-700/40 z-10"></div>
+        <div class="rounded-[2rem] bg-[#0C0D14] border border-white/[0.06] overflow-hidden">
+          <div class="p-4 space-y-3">
+
+            <!-- Camera viewfinder -->
+            <div id="phone-step-0" class="phone-step relative h-40 rounded-xl bg-gradient-to-br from-[#111827] to-[#0F172A] border border-white/[0.06] flex items-center justify-center overflow-hidden scanline">
+              <div class="absolute inset-0 grid-dense opacity-30"></div>
+              <!-- Crosshair corners -->
+              <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#00D4FF]/50"></div>
+              <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#00D4FF]/50"></div>
+              <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#00D4FF]/50"></div>
+              <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#00D4FF]/50"></div>
+              <div class="relative text-center">
+                <div class="w-16 h-16 mx-auto rounded-full border-2 border-[#00D4FF]/50 flex items-center justify-center mb-2 pulse-ring">
+                  <svg class="w-7 h-7 text-[#00D4FF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                    <circle cx="12" cy="13" r="4"/>
+                  </svg>
+                </div>
+                <p class="font-mono text-[10px] text-[#00D4FF]">SCANNING ERROR...</p>
+              </div>
+            </div>
+
+            <!-- OCR Result (animates in) -->
+            <div id="phone-step-1" class="phone-step rounded-lg bg-black/60 border border-[#00D4FF]/20 p-3 font-mono text-[9px] text-[#00D4FF] leading-relaxed">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-zinc-500">DETECTED ERROR:</span>
+                <span class="text-[8px] text-[#00D4FF]/50">94ms</span>
+              </div>
+              <div id="hero-ocr-text" class="typing-cursor">TypeError: Cannot read 'user'</div>
+            </div>
+
+            <!-- Voice command with waveform -->
+            <div id="phone-step-2" class="phone-step flex items-center gap-2 rounded-lg bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 p-3">
+              <div class="voice-wave shrink-0">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <span class="font-mono text-[10px] text-[#8B5CF6]">"Fix this and run the tests"</span>
+            </div>
+
+            <!-- Status with progress animation -->
+            <div id="phone-step-3" class="phone-step">
+              <div class="step-progress mb-2">
+                <div id="phone-progress-bar" class="step-progress-fill" style="width: 0%"></div>
+              </div>
+              <div class="flex items-center gap-2 rounded-lg bg-[#10B981]/10 border border-[#10B981]/30 p-3">
+                <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                <span id="phone-status-text" class="font-mono text-[10px] text-[#10B981]">✓ Fixed. 12 tests passing.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto scroll-reveal-group">
+      {hero.stats.map((stat) => (
+        <div class="dl-card p-5 rounded-xl text-left scroll-reveal gradient-border">
+          <div class="text-[10px] font-mono uppercase tracking-wider text-zinc-500 mb-1 flex items-center justify-between">
+            <span>{stat.label}</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00D4FF]/50"></span>
+          </div>
+          <div class="flex items-baseline gap-1.5 my-1">
+            <span
+              id={stat.id}
+              data-target={stat.value}
+              data-decimals={stat.decimals || 0}
+              class="text-3xl sm:text-4xl font-bold font-mono tracking-tight text-white counter-digit"
+            >
+              0
+            </span>
+            <span class="font-mono text-xs sm:text-sm text-zinc-400 font-semibold">{stat.unit}</span>
+          </div>
+          <div class="text-[10px] font-mono text-zinc-500 truncate">{stat.sub}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animate } from 'animejs';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // ═══ Counter Animation ═══
+    const counters = document.querySelectorAll('.counter-digit');
+    counters.forEach((el) => {
+      const targetVal = parseFloat(el.getAttribute('data-target') || '0');
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const obj = { val: 0 };
+      animate(obj, {
+        val: targetVal,
+        duration: 2400,
+        ease: 'outExpo',
+        onUpdate: () => {
+          el.textContent = decimals > 0 ? obj.val.toFixed(decimals) : Math.round(obj.val).toString();
+        },
+      });
+    });
+
+    // ═══ Staggered Hero Text Reveal ═══
+    animate('.hero-text-reveal', {
+      opacity: [0, 1],
+      translateY: [24, 0],
+      duration: 900,
+      delay: (_el: any, i: number) => i * 200,
+      ease: 'outExpo',
+    });
+
+    // ═══ Phone Step Cycling Animation ═══
+    const steps = [
+      document.getElementById('phone-step-0'),
+      document.getElementById('phone-step-1'),
+      document.getElementById('phone-step-2'),
+      document.getElementById('phone-step-3'),
+    ];
+    const progressBar = document.getElementById('phone-progress-bar');
+    const statusText = document.getElementById('phone-status-text');
+
+    const stepStates = [
+      { label: 'Scanning...', progress: 15 },
+      { label: 'Error detected', progress: 35 },
+      { label: 'Processing voice...', progress: 65 },
+      { label: '✓ Fixed. 12 tests passing.', progress: 100 },
+    ];
+
+    let currentPhoneStep = 0;
+
+    function cyclePhoneStep() {
+      steps.forEach((step, i) => {
+        if (!step) return;
+        if (i === currentPhoneStep) {
+          animate(step, {
+            opacity: [0.4, 1],
+            scale: [0.98, 1],
+            duration: 600,
+            ease: 'outExpo',
+          });
+        } else {
+          step.style.opacity = '0.4';
+        }
+      });
+
+      if (progressBar) {
+        animate(progressBar, {
+          width: `${stepStates[currentPhoneStep].progress}%`,
+          duration: 800,
+          ease: 'outExpo',
+        });
+      }
+
+      if (statusText && currentPhoneStep === 3) {
+        statusText.textContent = stepStates[3].label;
+      } else if (statusText) {
+        statusText.textContent = stepStates[currentPhoneStep].label;
+      }
+
+      currentPhoneStep = (currentPhoneStep + 1) % steps.length;
+    }
+
+    // Initial state: all visible
+    steps.forEach((s) => { if (s) s.style.opacity = '1'; });
+    if (progressBar) progressBar.style.width = '100%';
+
+    // Start cycling after 2.5s
+    let phoneCycleInterval: ReturnType<typeof setInterval>;
+    setTimeout(() => {
+      currentPhoneStep = 0;
+      cyclePhoneStep();
+      phoneCycleInterval = setInterval(cyclePhoneStep, 2000);
+    }, 2500);
+  });
+</script>

@@ -1,0 +1,77 @@
+---
+import { debugPipeline } from '../data/content';
+---
+
+<section id="pipeline" class="py-24 sm:py-32 bg-[#0A0A0F] border-b border-white/[0.06] relative overflow-hidden">
+  <div class="absolute inset-0 grid-dense opacity-10 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/30 text-xs font-mono text-[#F59E0B] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>
+        <span>{debugPipeline.eyebrow}</span>
+      </div>
+      <h2 class="display-section text-white tracking-tight">
+        {debugPipeline.title}
+      </h2>
+      <p class="mt-4 text-sm sm:text-base text-zinc-400 leading-relaxed">
+        {debugPipeline.subtitle}
+      </p>
+    </div>
+
+    <!-- Pipeline Phases -->
+    <div class="max-w-4xl mx-auto space-y-4 scroll-reveal-group">
+      {debugPipeline.phases.map((phase, idx) => (
+        <div class="dl-card rounded-xl p-5 sm:p-6 scroll-reveal group" data-pipeline-phase={idx}>
+          <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+
+            <!-- Phase Number -->
+            <div class="flex items-center gap-3 sm:w-48 shrink-0">
+              <div
+                class="w-10 h-10 rounded-xl flex items-center justify-center font-mono text-sm font-bold shrink-0 transition-transform duration-300 group-hover:scale-110"
+                style={`background: ${phase.accent}15; color: ${phase.accent}; border: 1px solid ${phase.accent}30`}
+              >
+                {idx + 1}
+              </div>
+              <div>
+                <div class="font-heading font-bold text-white text-sm">{phase.name}</div>
+                <div class="font-mono text-[10px] text-zinc-500">{phase.location}</div>
+              </div>
+            </div>
+
+            <!-- Phase Details -->
+            <div class="flex-1 min-w-0">
+              <p class="text-xs text-zinc-400 leading-relaxed mb-3">{phase.description}</p>
+              <div class="flex flex-wrap items-center gap-3">
+                <span
+                  class="px-2 py-0.5 rounded text-[9px] font-mono font-bold tracking-wider"
+                  style={`color: ${phase.accent}; background: ${phase.accent}10; border: 1px solid ${phase.accent}30`}
+                >
+                  {phase.time}
+                </span>
+                <span class="text-[10px] text-zinc-500 font-mono">→ {phase.output}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Connector line between phases */}
+          {idx < debugPipeline.phases.length - 1 && (
+            <div class="flex justify-center mt-3 sm:ml-5">
+              <div class="w-px h-4 bg-gradient-to-b from-white/10 to-transparent"></div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Total Time -->
+    <div class="mt-8 text-center scroll-reveal">
+      <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#10B981]/10 border border-[#10B981]/30">
+        <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+        <span class="font-mono text-xs text-[#10B981] font-bold">TOTAL: 20-30 SECONDS END-TO-END</span>
+      </div>
+    </div>
+  </div>
+</section>
