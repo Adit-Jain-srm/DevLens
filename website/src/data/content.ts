@@ -14,7 +14,7 @@ export const hero = {
   headline: "Point. Speak.",
   headlineAccent: "Fixed.",
   subtitle:
-    "The first developer tool with eyes and ears. 57% of debugging is comprehension — DevLens eliminates it. Phone camera reads errors in 100ms. Voice commands drive the agent. Laptop fixes, tests, and verifies. All in under 30 seconds.",
+    "The first developer tool with eyes and ears. Phone camera reads errors in 100ms. Voice commands drive the agent. Laptop fixes, tests, verifies — in under 30 seconds.",
   stats: [
     {
       id: "stat-ocr",

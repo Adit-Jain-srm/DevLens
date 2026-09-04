@@ -35,3 +35,4 @@ dist/
 .competitor-analysis/
 .cursor/
 docs/competitive-intel.md
+.vercel
