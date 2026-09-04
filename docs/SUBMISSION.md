@@ -492,7 +492,6 @@ This is not a checkbox feature — it is architecturally meaningful because deve
 | Live Demo Website | [devlens-aj5.vercel.app](https://devlens-aj5.vercel.app) |
 | Architecture Diagram | See [Architecture](#architecture) section above |
 | Feasibility Study | `docs/research/feasibility-study.md` |
-| Demo Video | *[To be recorded with MVP prototype]* |
 | Technology Validation | ML Kit GenAI confirmed on iQOO devices |
 
 ---
