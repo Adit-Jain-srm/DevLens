@@ -252,6 +252,134 @@ export const features = {
       badge: "WOW FEATURE",
       accent: "#EF4444",
     },
+    {
+      title: "Code Graph & Blast Radius",
+      description: "Laptop builds a call/import graph via tree-sitter. Phone queries it to show which functions are affected by a change — the riskiest hunk appears first, formatting last.",
+      icon: "🕸️",
+      badge: "GRAPH",
+      accent: "#06B6D4",
+    },
+    {
+      title: "PR Review from Phone",
+      description: "GitHub webhook diffs arrive on the phone. The code graph ranks hunks by blast radius, Gemini Nano summarizes each one, and you voice-approve or request changes — no desk required.",
+      icon: "🔀",
+      badge: "PR REVIEW",
+      accent: "#A855F7",
+    },
+    {
+      title: "RAG-Powered Doc Compliance",
+      description: "Upload API docs, style guides, or compliance specs from phone or laptop. DevLens indexes them and checks every fix against your team's standards before applying.",
+      icon: "📄",
+      badge: "RAG",
+      accent: "#0EA5E9",
+    },
+  ],
+};
+
+export const gitIntegration = {
+  eyebrow: "GIT & PR WORKFLOW",
+  title: "From commit to review — on your phone.",
+  subtitle: "DevLens doesn't just fix bugs. It understands your repository's structure, ranks changes by risk, and lets you review PRs by voice.",
+  capabilities: [
+    {
+      title: "Code Graph Construction",
+      description: "The laptop daemon parses the full repository with tree-sitter, building a call graph (which functions call which), import graph (what depends on what), and type graph (where definitions live). This graph is serialized and synced to the phone.",
+      details: [
+        "tree-sitter: fast, incremental, language-agnostic parsing",
+        "Graph stored as adjacency index (~4-12 MB for 200k LOC repo)",
+        "Full sync at session start, incremental deltas after file edits",
+        "Supports JavaScript, TypeScript, Python, Rust, Go, Java",
+      ],
+      icon: "🕸️",
+      accent: "#00D4FF",
+    },
+    {
+      title: "Blast-Radius Ranking",
+      description: "Every diff is reordered by impact. A bounded graph traversal from each changed function counts direct callers, callees, and type references. The hunk touching 9 call sites surfaces first — the formatting change sinks to the bottom.",
+      details: [
+        "Bounded traversal: 1-hop callers + callees + type defs",
+        "2.5M tokens → 1,500-3,000 tokens per query (GLANCE-inspired)",
+        "Risk score: callers × severity × recency of last failure",
+        "Token-budgeted: context assembler enforces ceiling before inference",
+      ],
+      icon: "💥",
+      accent: "#F59E0B",
+    },
+    {
+      title: "Phone-First PR Review",
+      description: "GitHub push event webhooks arrive on the phone. The code graph resolves the diff to graph nodes, Gemini Nano generates per-hunk summaries on-device, and the developer reviews by voice.",
+      details: [
+        "Voice commands: approve, comment, request-changes",
+        "Draft PR for mechanical fixes (null checks, missing imports)",
+        "Every suggestion paired with its blast-radius context",
+        "GitHub REST API — the only networked step in the review flow",
+      ],
+      icon: "🔀",
+      accent: "#8B5CF6",
+    },
+    {
+      title: "Gitflow-Aware Agent",
+      description: "The agent understands branch conventions (main, develop, feature/*, hotfix/*). It checks git history for recent changes, correlates errors with commits, and auto-selects the right branch for fixes.",
+      details: [
+        "git log + git diff to find recent relevant changes",
+        "Correlates errors with commits: \"this broke 18h ago in commit abc123\"",
+        "Branch-aware: fixes go to the right branch, not always main",
+        "Stash safety: auto-stash before patches, auto-pop on revert",
+      ],
+      icon: "🌿",
+      accent: "#10B981",
+    },
+  ],
+};
+
+export const ragDocuments = {
+  eyebrow: "RAG DOCUMENT INTELLIGENCE",
+  title: "Your docs. Your rules. Every fix.",
+  subtitle: "Upload API documentation, style guides, compliance specs, or any reference material. DevLens indexes them and ensures every suggestion follows your team's standards.",
+  uploadSources: [
+    { source: "Phone Camera", description: "Photograph printed docs, whiteboard notes, or a colleague's screen", icon: "📸" },
+    { source: "Phone Files", description: "Pick PDFs, markdown, or text files from local storage", icon: "📱" },
+    { source: "Laptop Transfer", description: "Send docs via Office Kit file transfer or clipboard sync", icon: "💻" },
+    { source: "URL Fetch", description: "Paste a documentation URL — agent scrapes and indexes it", icon: "🌐" },
+  ],
+  supportedFormats: ["PDF", "Markdown", "Plain Text", "HTML", "Word (.docx)", "Images (OCR)"],
+  useCases: [
+    {
+      title: "API Compliance",
+      description: "Upload your REST API spec. When DevLens generates a fix that calls an endpoint, it checks the spec for correct parameters, auth headers, and response types.",
+      example: "Fix uses /api/v2/users but spec says /api/v3/users — DevLens catches the mismatch.",
+      icon: "🔌",
+      accent: "#00D4FF",
+    },
+    {
+      title: "Style Guide Enforcement",
+      description: "Upload your team's coding standards. Every generated patch is validated against naming conventions, error handling patterns, and architectural rules.",
+      example: "Team uses camelCase but fix generates snake_case — auto-corrected before applying.",
+      icon: "📏",
+      accent: "#8B5CF6",
+    },
+    {
+      title: "Compliance & Security",
+      description: "Upload SOC2 requirements, GDPR guidelines, or security policies. DevLens flags generated code that might violate compliance rules.",
+      example: "Fix logs user email in plaintext — compliance doc says PII must be masked. DevLens warns.",
+      icon: "🛡️",
+      accent: "#10B981",
+    },
+    {
+      title: "Framework Migration",
+      description: "Upload migration guides (React 18→19, Express→Fastify). DevLens generates fixes using the NEW patterns, not the deprecated ones.",
+      example: "Project migrating to React 19 — fix uses useEffect (old) vs useAction (new). DevLens uses the new pattern.",
+      icon: "🔄",
+      accent: "#F59E0B",
+    },
+  ],
+  pipeline: [
+    "Document uploaded via phone or laptop",
+    "On-device: Gemini Nano extracts key rules and constraints",
+    "Laptop: chunks indexed into vector store (local, never leaves machine)",
+    "During fix: agent queries relevant doc chunks before generating patches",
+    "Compliance check: every fix validated against indexed rules",
+    "Violations flagged with source reference: \"Rule 4.2 in style-guide.pdf\"",
   ],
 };
 
