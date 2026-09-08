@@ -35,5 +35,6 @@ dist/
 .competitor-analysis/
 .cursor/
 docs/competitive-intel.md
+docs/video-walkthrough-script.md
 .vercel
 docs/strategy/
