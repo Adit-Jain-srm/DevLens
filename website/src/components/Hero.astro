@@ -2,128 +2,136 @@
 import { hero, site } from '../data/content';
 ---
 
-<section class="relative min-h-screen pt-24 pb-20 sm:pt-28 sm:pb-28 bg-[#0A0A0F] overflow-hidden flex flex-col justify-center border-b border-white/[0.06]">
-  <div class="absolute inset-0 hero-mesh pointer-events-none opacity-90"></div>
-  <div class="absolute inset-0 grid-subtle opacity-25 pointer-events-none"></div>
-  <div id="hero-particles" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+<!--
+  Film thesis
+  1. Metaphor — a noisy capture resolves into one verified line.
+  2. Hero material — the phone viewfinder.
+  3. Playhead — scroll moves Observe → Understand → Act → Verify. Scroll up rewinds.
+  4. Ceremony — "See It In Action" censors, bursts, then a wave, then the demo.
+  5. Still — reduced motion shows the resolved headline and the phone already Fixed.
+-->
 
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+<div class="film" id="film">
+  <div id="film-spacer" class="film-spacer" aria-hidden="true"></div>
 
-    <!-- Badge -->
-    <div class="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono text-zinc-400 mb-8 backdrop-blur-md shimmer">
-      <span class="w-2 h-2 rounded-full bg-[#00D4FF] animate-pulse"></span>
-      <span class="font-bold text-white tracking-wide">{site.teamName.toUpperCase()}</span>
-      <span class="text-zinc-600">·</span>
-      <span>{site.hackathon}</span>
-      <span class="text-zinc-600">·</span>
-      <span class="px-2 py-0.5 rounded bg-[#00D4FF]/10 text-[#00D4FF] border border-[#00D4FF]/30 font-bold text-[10px] tracking-wider uppercase">
-        {site.track}
-      </span>
-    </div>
+  <div id="film-stage" class="film-stage">
+    <div class="absolute inset-0 hero-mesh pointer-events-none"></div>
+    <div class="absolute inset-0 grid-subtle opacity-25 pointer-events-none"></div>
 
-    <!-- Headline -->
-    <div class="max-w-4xl mx-auto mb-10">
-      <h1 class="display-hero text-white tracking-tight">
-        <span class="hero-text-reveal inline-block">Point. Speak.</span>
-        <br />
-        <span class="text-gradient-cyan glow-text hero-text-reveal inline-block" style="animation-delay: 0.2s">Fixed.</span>
-      </h1>
+    <div class="film-fit relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="grid items-center gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12">
+        <div class="film-copy text-center lg:text-left">
+          <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-mono text-zinc-400 mb-6 backdrop-blur-md shimmer">
+            <span class="w-2 h-2 rounded-full bg-[#00D4FF] animate-pulse"></span>
+            <span class="font-bold text-white tracking-wide">{site.teamName.toUpperCase()}</span>
+            <span class="text-zinc-600">·</span>
+            <span>{site.hackathon}</span>
+            <span class="text-zinc-600 hidden sm:inline">·</span>
+            <span class="hidden sm:inline px-2 py-0.5 rounded bg-[#00D4FF]/10 text-[#00D4FF] border border-[#00D4FF]/30 font-bold text-[10px] tracking-wider uppercase">
+              {site.track}
+            </span>
+          </div>
 
-      <p class="mt-8 text-base sm:text-lg md:text-xl text-zinc-400 max-w-3xl mx-auto leading-relaxed hero-text-reveal" style="animation-delay: 0.4s">
-        {hero.subtitle}
-      </p>
+          <h1 class="display-hero text-white">
+            <span class="sr-only">Point. Speak. Fixed.</span>
+            <span id="cipher-a" class="block" aria-hidden="true">Point. Speak.</span>
+            <span id="cipher-b" class="block text-gradient-cyan glow-text" aria-hidden="true">Fixed.</span>
+          </h1>
 
-      <!-- CTA Buttons -->
-      <div class="mt-10 flex flex-wrap items-center justify-center gap-4 hero-text-reveal" style="animation-delay: 0.6s">
-        <a
-          href="#how-it-works"
-          class="magnetic-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-mono text-sm font-bold bg-white text-black hover:bg-zinc-100 transition-all shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_16px_-4px_rgba(255,255,255,0.15)] hover:shadow-[0_4px_20px_-2px_rgba(0,212,255,0.3)]"
-        >
-          <svg class="w-4 h-4 fill-black" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-          <span>See It In Action</span>
-        </a>
-        <a
-          href="#architecture"
-          class="magnetic-btn inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-mono text-sm font-semibold bg-[#0C0D14] text-zinc-300 border border-white/10 hover:border-[#00D4FF]/30 hover:text-white transition-all"
-        >
-          <span>Explore Architecture</span>
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
+          <p id="film-phase" class="film-figure mt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-[#00D4FF]">
+            Observe
+          </p>
 
-    <!-- Animated Phone Mockup -->
-    <div class="relative max-w-sm mx-auto my-12 hero-text-reveal" style="animation-delay: 0.8s">
-      <div class="relative rounded-[2.5rem] border-4 border-zinc-700/60 bg-[#0A0A0F] p-4 phone-glow">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#0A0A0F] rounded-b-2xl border-b border-l border-r border-zinc-700/40 z-10"></div>
-        <div class="rounded-[2rem] bg-[#0C0D14] border border-white/[0.06] overflow-hidden">
-          <div class="p-4 space-y-3">
+          <p class="mt-4 text-base sm:text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            {hero.subtitle}
+          </p>
 
-            <!-- Camera viewfinder -->
-            <div id="phone-step-0" class="phone-step relative h-40 rounded-xl bg-gradient-to-br from-[#111827] to-[#0F172A] border border-white/[0.06] flex items-center justify-center overflow-hidden scanline">
-              <div class="absolute inset-0 grid-dense opacity-30"></div>
-              <!-- Crosshair corners -->
-              <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#00D4FF]/50"></div>
-              <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#00D4FF]/50"></div>
-              <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#00D4FF]/50"></div>
-              <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#00D4FF]/50"></div>
-              <div class="relative text-center">
-                <div class="w-16 h-16 mx-auto rounded-full border-2 border-[#00D4FF]/50 flex items-center justify-center mb-2 pulse-ring">
-                  <svg class="w-7 h-7 text-[#00D4FF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                    <circle cx="12" cy="13" r="4"/>
-                  </svg>
+          <p class="film-ghost mt-3 font-mono text-xs text-zinc-500" aria-hidden="true">
+            █▓▒░ TypeError: Cannot read 'user' ░▒▓█
+          </p>
+
+          <div class="mt-8 flex items-center justify-center lg:justify-start">
+            <a
+              id="film-cta"
+              href="#how-it-works"
+              class="film-cta inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-mono text-sm font-bold bg-white text-black hover:bg-zinc-100 shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_16px_-4px_rgba(255,255,255,0.15)]"
+            >
+              <svg class="w-4 h-4 fill-black" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span data-cta-label>See It In Action</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="film-phone mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+          <div class="relative rounded-[2.2rem] border-4 border-zinc-700/60 bg-[#0A0A0F] p-3 phone-glow">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-[#0A0A0F] rounded-b-2xl border-b border-l border-r border-zinc-700/40 z-10"></div>
+            <div class="rounded-[1.7rem] bg-[#0C0D14] border border-white/[0.06] overflow-hidden">
+              <div class="p-3 space-y-2.5">
+                <div id="phone-step-0" class="phone-step relative h-32 rounded-xl bg-gradient-to-br from-[#111827] to-[#0F172A] border border-white/[0.06] flex items-center justify-center overflow-hidden scanline">
+                  <div class="film-mosaic" aria-hidden="true"></div>
+                  <div class="absolute inset-0 grid-dense opacity-30"></div>
+                  <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#00D4FF]/50"></div>
+                  <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#00D4FF]/50"></div>
+                  <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#00D4FF]/50"></div>
+                  <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#00D4FF]/50"></div>
+                  <div class="relative text-center">
+                    <div class="w-14 h-14 mx-auto rounded-full border-2 border-[#00D4FF]/50 flex items-center justify-center mb-2 pulse-ring">
+                      <svg class="w-6 h-6 text-[#00D4FF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                      </svg>
+                    </div>
+                    <p class="font-mono text-[10px] text-[#00D4FF]">SCANNING ERROR...</p>
+                  </div>
                 </div>
-                <p class="font-mono text-[10px] text-[#00D4FF]">SCANNING ERROR...</p>
-              </div>
-            </div>
 
-            <!-- OCR Result (animates in) -->
-            <div id="phone-step-1" class="phone-step rounded-lg bg-black/60 border border-[#00D4FF]/20 p-3 font-mono text-[9px] text-[#00D4FF] leading-relaxed">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-zinc-500">DETECTED ERROR:</span>
-                <span class="text-[8px] text-[#00D4FF]/50">94ms</span>
-              </div>
-              <div id="hero-ocr-text" class="typing-cursor">TypeError: Cannot read 'user'</div>
-            </div>
+                <div id="phone-step-1" class="phone-step rounded-lg bg-black/60 border border-[#00D4FF]/20 p-2.5 font-mono text-[9px] text-[#00D4FF] leading-relaxed">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-zinc-500">DETECTED ERROR</span>
+                    <span class="film-figure text-[8px] text-[#00D4FF]/70">94ms</span>
+                  </div>
+                  <div>TypeError: Cannot read 'user'</div>
+                </div>
 
-            <!-- Voice command with waveform -->
-            <div id="phone-step-2" class="phone-step flex items-center gap-2 rounded-lg bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 p-3">
-              <div class="voice-wave shrink-0">
-                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-              </div>
-              <span class="font-mono text-[10px] text-[#8B5CF6]">"Fix this and run the tests"</span>
-            </div>
+                <div id="phone-step-2" class="phone-step flex items-center gap-2 rounded-lg bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 p-2.5">
+                  <div class="voice-wave shrink-0">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <span class="font-mono text-[10px] text-[#8B5CF6]">"Fix this and run the tests"</span>
+                </div>
 
-            <!-- Status with progress animation -->
-            <div id="phone-step-3" class="phone-step">
-              <div class="step-progress mb-2">
-                <div id="phone-progress-bar" class="step-progress-fill" style="width: 0%"></div>
-              </div>
-              <div class="flex items-center gap-2 rounded-lg bg-[#10B981]/10 border border-[#10B981]/30 p-3">
-                <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
-                <span id="phone-status-text" class="font-mono text-[10px] text-[#10B981]">✓ Fixed. 12 tests passing.</span>
+                <div id="phone-step-3" class="phone-step">
+                  <div class="step-progress mb-2">
+                    <div id="phone-progress-bar" class="step-progress-fill film-progress"></div>
+                  </div>
+                  <div class="flex items-center gap-2 rounded-lg bg-[#10B981]/10 border border-[#10B981]/30 p-2.5">
+                    <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                    <span id="phone-status-text" class="film-figure font-mono text-[10px] text-[#10B981]">Fixed. 12 tests passing.</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- Stats Grid -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto scroll-reveal-group">
+<section id="proof" class="relative bg-[#0A0A0F] border-b border-white/[0.06] py-16 sm:py-20">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 scroll-reveal-group">
       {hero.stats.map((stat) => (
-        <div class="dl-card p-5 rounded-xl text-left scroll-reveal gradient-border">
-          <div class="text-[10px] font-mono uppercase tracking-wider text-zinc-500 mb-1 flex items-center justify-between">
-            <span>{stat.label}</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-[#00D4FF]/50"></span>
+        <div class="dl-card p-5 rounded-xl text-left scroll-reveal">
+          <div class="text-[10px] font-mono uppercase tracking-wider text-zinc-500 mb-1">
+            {stat.label}
           </div>
           <div class="flex items-baseline gap-1.5 my-1">
             <span
               id={stat.id}
               data-target={stat.value}
               data-decimals={stat.decimals || 0}
-              class="text-3xl sm:text-4xl font-bold font-mono tracking-tight text-white counter-digit"
+              class="film-figure text-3xl sm:text-4xl font-bold font-mono tracking-tight text-white counter-digit"
             >
               0
             </span>
@@ -136,96 +144,331 @@ import { hero, site } from '../data/content';
   </div>
 </section>
 
+<div id="leave-overlay" class="leave-overlay" aria-hidden="true">
+  <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path id="wave-lead" fill="#12323c"></path>
+    <path id="wave-cover" fill="#0A0A0F"></path>
+  </svg>
+</div>
+<div id="leave-burst" aria-hidden="true"></div>
+
 <script>
-  import { animate } from 'animejs';
+  const GLYPHS = ['█', '▓', '▒', '░', '•'];
+  const LINE_A = 'Point. Speak.';
+  const LINE_B = 'Fixed.';
+  const CTA_LABEL = 'See It In Action';
+  const PHASES = ['Observe', 'Understand', 'Act', 'Verify'];
+  const STATUS = [
+    'Scanning the frame',
+    'TypeError locked',
+    'Voice command in',
+    'Fixed. 12 tests passing.',
+  ];
+
+  function mask(text: string, keep: number, frame: number): string {
+    let out = '';
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (ch === ' ' || ch === '.' || ch === "'") {
+        out += ch;
+        continue;
+      }
+      out += i < keep ? ch : GLYPHS[(i + frame) % GLYPHS.length];
+    }
+    return out;
+  }
+
+  function runCipher(
+    el: HTMLElement,
+    text: string,
+    mode: 'reveal' | 'censor',
+    done?: () => void,
+  ): () => void {
+    const frames = 12;
+    let frame = 0;
+    const timer = window.setInterval(() => {
+      frame += 1;
+      const t = frame / frames;
+      const keep = mode === 'reveal'
+        ? Math.round(t * text.length)
+        : Math.round((1 - t) * text.length);
+      el.textContent = mask(text, keep, frame);
+      if (frame >= frames) {
+        window.clearInterval(timer);
+        el.textContent = mode === 'reveal' ? text : mask(text, 0, frames);
+        done?.();
+      }
+    }, 38);
+    return () => window.clearInterval(timer);
+  }
+
+  function wavePath(ys: number[]): string {
+    const n = ys.length;
+    let d = `M 0 ${ys[0]}`;
+    for (let i = 0; i < n - 1; i++) {
+      const x0 = (i / (n - 1)) * 100;
+      const x1 = ((i + 1) / (n - 1)) * 100;
+      const mx = (x0 + x1) / 2;
+      d += ` C ${mx} ${ys[i]}, ${mx} ${ys[i + 1]}, ${x1} ${ys[i + 1]}`;
+    }
+    return `${d} L 100 100 L 0 100 Z`;
+  }
+
+  function easeOutCubic(t: number): number {
+    return 1 - (1 - t) ** 3;
+  }
+
+  function easeOutQuad(t: number): number {
+    return 1 - (1 - t) ** 2;
+  }
 
   document.addEventListener('DOMContentLoaded', () => {
-    // ═══ Counter Animation ═══
-    const counters = document.querySelectorAll('.counter-digit');
-    counters.forEach((el) => {
-      const targetVal = parseFloat(el.getAttribute('data-target') || '0');
-      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
-      const obj = { val: 0 };
-      animate(obj, {
-        val: targetVal,
-        duration: 2400,
-        ease: 'outExpo',
-        onUpdate: () => {
-          el.textContent = decimals > 0 ? obj.val.toFixed(decimals) : Math.round(obj.val).toString();
-        },
-      });
-    });
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarseQuery = window.matchMedia('(pointer: coarse)');
+    const phoneCutQuery = window.matchMedia('(pointer: coarse), (max-width: 760px)');
 
-    // ═══ Staggered Hero Text Reveal ═══
-    animate('.hero-text-reveal', {
-      opacity: [0, 1],
-      translateY: [24, 0],
-      duration: 900,
-      delay: (_el: any, i: number) => i * 200,
-      ease: 'outExpo',
-    });
+    const spacer = document.getElementById('film-spacer');
+    const stage = document.getElementById('film-stage');
+    const film = document.getElementById('film');
+    const cipherA = document.getElementById('cipher-a');
+    const cipherB = document.getElementById('cipher-b');
+    const phaseEl = document.getElementById('film-phase');
+    const statusEl = document.getElementById('phone-status-text');
+    const progress = document.getElementById('phone-progress-bar');
+    const steps = [0, 1, 2, 3].map((i) => document.getElementById(`phone-step-${i}`));
+    const cta = document.getElementById('film-cta');
+    const overlay = document.getElementById('leave-overlay');
+    const lead = document.getElementById('wave-lead') as SVGPathElement | null;
+    const cover = document.getElementById('wave-cover') as SVGPathElement | null;
+    const burst = document.getElementById('leave-burst');
 
-    // ═══ Phone Step Cycling Animation ═══
-    const steps = [
-      document.getElementById('phone-step-0'),
-      document.getElementById('phone-step-1'),
-      document.getElementById('phone-step-2'),
-      document.getElementById('phone-step-3'),
-    ];
-    const progressBar = document.getElementById('phone-progress-bar');
-    const statusText = document.getElementById('phone-status-text');
+    if (!spacer || !stage || !film) return;
 
-    const stepStates = [
-      { label: 'Scanning...', progress: 15 },
-      { label: 'Error detected', progress: 35 },
-      { label: 'Processing voice...', progress: 65 },
-      { label: '✓ Fixed. 12 tests passing.', progress: 100 },
-    ];
+    const centers = [0, 0.34, 0.67, 1];
+    let travel = 0;
+    let covered = false;
+    let scrubbing = false;
+    let leaving = false;
+    let raf = 0;
+    let lastWidth = window.innerWidth;
 
-    let currentPhoneStep = 0;
-
-    function cyclePhoneStep() {
-      steps.forEach((step, i) => {
-        if (!step) return;
-        if (i === currentPhoneStep) {
-          animate(step, {
-            opacity: [0.4, 1],
-            scale: [0.98, 1],
-            duration: 600,
-            ease: 'outExpo',
-          });
-        } else {
-          step.style.opacity = '0.4';
-        }
-      });
-
-      if (progressBar) {
-        animate(progressBar, {
-          width: `${stepStates[currentPhoneStep].progress}%`,
-          duration: 800,
-          ease: 'outExpo',
-        });
-      }
-
-      if (statusText && currentPhoneStep === 3) {
-        statusText.textContent = stepStates[3].label;
-      } else if (statusText) {
-        statusText.textContent = stepStates[currentPhoneStep].label;
-      }
-
-      currentPhoneStep = (currentPhoneStep + 1) % steps.length;
+    function measure() {
+      const vh = window.innerHeight;
+      const distance = reduce ? 0 : Math.round(vh * (phoneCutQuery.matches ? 1.7 : 1.15));
+      spacer.style.height = `${vh + distance}px`;
+      travel = distance;
     }
 
-    // Initial state: all visible
-    steps.forEach((s) => { if (s) s.style.opacity = '1'; });
-    if (progressBar) progressBar.style.width = '100%';
+    function emphasis(sp: number, center: number): number {
+      const dist = Math.abs(sp - center);
+      const t = Math.max(0, 1 - dist / 0.34);
+      return 0.3 + 0.7 * t * t;
+    }
 
-    // Start cycling after 2.5s
-    let phoneCycleInterval: ReturnType<typeof setInterval>;
-    setTimeout(() => {
-      currentPhoneStep = 0;
-      cyclePhoneStep();
-      phoneCycleInterval = setInterval(cyclePhoneStep, 2000);
-    }, 2500);
+    function applyStill() {
+      if (cipherA) cipherA.textContent = LINE_A;
+      if (cipherB) cipherB.textContent = LINE_B;
+      steps.forEach((step, i) => {
+        if (step) step.style.opacity = i === 3 ? '1' : '0.32';
+      });
+      if (progress) progress.style.transform = 'scaleX(1)';
+      if (phaseEl) phaseEl.textContent = 'Verify';
+      if (statusEl) statusEl.textContent = STATUS[3];
+      stage.style.setProperty('--sp', '1');
+    }
+
+    function setCovered(next: boolean) {
+      if (next === covered) return;
+      covered = next;
+      stage.style.visibility = next ? 'hidden' : 'visible';
+      stage.style.pointerEvents = next ? 'none' : '';
+      if (next) stage.setAttribute('inert', '');
+      else stage.removeAttribute('inert');
+    }
+
+    function tick() {
+      raf = 0;
+      const y = window.scrollY;
+      const sp = travel <= 0 ? 1 : Math.min(1, Math.max(0, y / travel));
+      setCovered(y >= film.offsetHeight - 1);
+
+      if (reduce) return;
+
+      stage.style.setProperty('--sp', sp.toFixed(4));
+      steps.forEach((step, i) => {
+        if (step) step.style.opacity = emphasis(sp, centers[i]).toFixed(3);
+      });
+      if (progress) progress.style.transform = `scaleX(${(0.08 + sp * 0.92).toFixed(4)})`;
+
+      const phase = Math.min(3, Math.floor(sp * 4));
+      if (phaseEl && phaseEl.textContent !== PHASES[phase]) phaseEl.textContent = PHASES[phase];
+      if (statusEl && statusEl.textContent !== STATUS[phase]) statusEl.textContent = STATUS[phase];
+
+      const nextScrub = sp > 0.02;
+      if (nextScrub !== scrubbing) {
+        scrubbing = nextScrub;
+        stage.classList.toggle('is-scrubbing', nextScrub);
+      }
+    }
+
+    function requestTick() {
+      if (raf) return;
+      raf = window.requestAnimationFrame(tick);
+    }
+
+    function burstFrom(x: number, y: number) {
+      if (!burst) return;
+      for (let i = 0; i < 12; i++) {
+        const bit = document.createElement('span');
+        bit.className = 'leave-bit';
+        bit.style.left = `${x}px`;
+        bit.style.top = `${y}px`;
+        burst.appendChild(bit);
+        const angle = (Math.PI * 2 * i) / 12 + (Math.random() - 0.5) * 0.4;
+        const dist = 36 + Math.random() * 72;
+        const start = performance.now();
+        const life = 560;
+        const step = (now: number) => {
+          const t = Math.min(1, (now - start) / life);
+          const e = easeOutQuad(t);
+          bit.style.transform = `translate3d(${Math.cos(angle) * dist * e}px, ${Math.sin(angle) * dist * e}px, 0)`;
+          bit.style.opacity = String(1 - t);
+          if (t < 1) requestAnimationFrame(step);
+          else bit.remove();
+        };
+        requestAnimationFrame(step);
+      }
+    }
+
+    function playWave(done: () => void) {
+      if (!overlay || !lead || !cover) {
+        done();
+        return;
+      }
+      const count = 7;
+      const leadDelay = Array.from({ length: count }, () => Math.random() * 0.08);
+      const coverDelay = leadDelay.map((d) => d + 0.06);
+      overlay.classList.add('is-on');
+      const start = performance.now();
+      const life = 720;
+      const frame = (now: number) => {
+        const t = Math.min(1, (now - start) / life);
+        const sample = (delays: number[]) => delays.map((delay) => {
+          const local = Math.min(1, Math.max(0, (t - delay) / 0.78));
+          return 100 - easeOutCubic(local) * 100;
+        });
+        lead.setAttribute('d', wavePath(sample(leadDelay)));
+        cover.setAttribute('d', wavePath(sample(coverDelay)));
+        if (t < 1) requestAnimationFrame(frame);
+        else done();
+      };
+      lead.setAttribute('d', wavePath(Array(count).fill(100)));
+      cover.setAttribute('d', wavePath(Array(count).fill(100)));
+      requestAnimationFrame(frame);
+    }
+
+    function resetLeave() {
+      leaving = false;
+      overlay?.classList.remove('is-on');
+      if (lead) lead.setAttribute('d', '');
+      if (cover) cover.setAttribute('d', '');
+      burst?.replaceChildren();
+      const label = cta?.querySelector('[data-cta-label]');
+      if (label) label.textContent = CTA_LABEL;
+    }
+
+    measure();
+    if (reduce) applyStill();
+    else {
+      if (cipherA) cipherA.textContent = mask(LINE_A, 0, 0);
+      if (cipherB) cipherB.textContent = mask(LINE_B, 0, 0);
+      if (cipherA) runCipher(cipherA, LINE_A, 'reveal');
+      if (cipherB) window.setTimeout(() => runCipher(cipherB, LINE_B, 'reveal'), 120);
+    }
+    requestTick();
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener('resize', () => {
+      if (coarseQuery.matches && window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
+      if (raf) cancelAnimationFrame(raf);
+      raf = window.requestAnimationFrame(() => {
+        raf = 0;
+        measure();
+        tick();
+      });
+    });
+    document.fonts?.ready.then(() => {
+      measure();
+      requestTick();
+    }).catch(() => {});
+
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted) resetLeave();
+    });
+
+    cta?.addEventListener('click', (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      event.preventDefault();
+      if (leaving) return;
+      leaving = true;
+      window.dispatchEvent(new CustomEvent('devlens-leave'));
+
+      const label = cta.querySelector('[data-cta-label]');
+      const go = () => {
+        const root = document.documentElement;
+        const prev = root.style.scrollBehavior;
+        root.style.scrollBehavior = 'auto';
+        document.getElementById('how-it-works')?.scrollIntoView({ block: 'start' });
+        root.style.scrollBehavior = prev;
+        requestTick();
+        window.requestAnimationFrame(() => {
+          overlay?.classList.remove('is-on');
+          leaving = false;
+          if (label) label.textContent = CTA_LABEL;
+        });
+      };
+
+      if (reduce || !label) {
+        go();
+        return;
+      }
+
+      runCipher(label as HTMLElement, CTA_LABEL, 'censor');
+      burstFrom(event.clientX, event.clientY);
+      window.setTimeout(() => playWave(go), 350);
+    });
+
+    const proof = document.getElementById('proof');
+    const counters = document.querySelectorAll<HTMLElement>('.counter-digit');
+    const paintCounters = () => {
+      counters.forEach((el) => {
+        const target = Number(el.dataset.target || '0');
+        const decimals = Number(el.dataset.decimals || '0');
+        if (reduce) {
+          el.textContent = decimals > 0 ? target.toFixed(decimals) : String(Math.round(target));
+          return;
+        }
+        const start = performance.now();
+        const frame = (now: number) => {
+          const t = Math.min(1, (now - start) / 900);
+          const value = target * easeOutCubic(t);
+          el.textContent = decimals > 0 ? value.toFixed(decimals) : String(Math.round(value));
+          if (t < 1) requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+      });
+    };
+    if (proof && 'IntersectionObserver' in window) {
+      const watch = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          watch.disconnect();
+          paintCounters();
+        }
+      }, { threshold: 0.3 });
+      watch.observe(proof);
+    } else {
+      paintCounters();
+    }
   });
 </script>

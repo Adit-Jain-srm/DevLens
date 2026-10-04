@@ -122,27 +122,36 @@
   top: 64px;
   left: 0;
   height: 2px;
+  width: 100%;
   background: linear-gradient(90deg, #00D4FF, #8B5CF6, #10B981);
   z-index: 100;
-  width: 0%;
-  transition: width 0.1s linear;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 
 /* ═══════ CURSOR GLOW ═══════ */
 #cursor-glow {
   position: fixed;
+  left: 0;
+  top: 0;
   width: 600px;
   height: 600px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
   background: radial-gradient(circle, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
   opacity: 0;
+  will-change: transform;
 }
 body:hover #cursor-glow {
   opacity: 1;
+}
+
+@media (pointer: coarse), (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  #cursor-glow {
+    display: none;
+  }
 }
 
 /* ═══════ CARDS ═══════ */
@@ -407,6 +416,168 @@ body:hover #cursor-glow {
   );
   pointer-events: none;
   z-index: 5;
+}
+
+/* ═══════ FILM (hero playhead) ═══════
+   Metaphor: a noisy capture resolves into one verified line.
+   Material: the phone viewfinder. Playhead: scroll.
+   Ceremony: the primary control. Still: resolved type + Fixed phone.
+*/
+main > section {
+  position: relative;
+  z-index: 2;
+  scroll-margin-top: 5.5rem;
+}
+
+.film-spacer {
+  height: 215vh;
+}
+
+.film-stage {
+  --sp: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #0A0A0F;
+  padding-top: 4rem;
+}
+
+.film-copy {
+  will-change: transform, opacity;
+}
+
+#cipher-b {
+  letter-spacing: calc(-0.05em + (1 - var(--sp)) * 0.09em);
+}
+
+.film-ghost {
+  opacity: calc(0.4 * (1 - var(--sp)));
+  transform: translate3d(calc((1 - var(--sp)) * 28px), 0, 0);
+  will-change: transform, opacity;
+}
+
+.film-phone {
+  transform: translate3d(0, calc(var(--sp) * -14px), 0);
+  will-change: transform;
+}
+
+.film-mosaic {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: calc(var(--sp) * 0.9);
+  background-image:
+    linear-gradient(rgba(10, 10, 15, 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 10, 15, 0.55) 1px, transparent 1px);
+  background-size: calc(5px + var(--sp) * 34px) calc(5px + var(--sp) * 34px);
+}
+
+.film-progress {
+  width: 100%;
+  transition: none;
+  transform: scaleX(0.08);
+  transform-origin: left center;
+}
+
+.film-cta:focus-visible {
+  outline: 2px solid #00D4FF;
+  outline-offset: 3px;
+}
+
+.film-stage.is-scrubbing .pulse-ring,
+.film-stage.is-scrubbing .phone-glow {
+  animation-play-state: paused;
+}
+
+.leave-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.leave-overlay.is-on {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.leave-overlay svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.leave-bit {
+  position: fixed;
+  z-index: 45;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 1px;
+  background: #00D4FF;
+  pointer-events: none;
+}
+
+.film-figure {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 760px) {
+  .film-spacer {
+    height: 270vh;
+  }
+  .film-stage {
+    align-items: flex-start;
+    padding-top: 4.5rem;
+  }
+  .film-fit {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film-spacer {
+    height: 100vh;
+  }
+  .film-stage {
+    --sp: 1;
+  }
+  .film-phone,
+  .film-ghost,
+  .film-copy,
+  .film-stage {
+    will-change: auto;
+    transform: none;
+  }
+  .film-ghost {
+    opacity: 0;
+  }
+  .film-mosaic {
+    opacity: 0;
+  }
+  #cipher-b {
+    letter-spacing: -0.05em;
+  }
+  #phone-step-0,
+  #phone-step-1,
+  #phone-step-2 {
+    opacity: 0.32;
+  }
+  #phone-step-3 {
+    opacity: 1;
+  }
+  .phone-glow,
+  .pulse-ring,
+  .shimmer,
+  .voice-wave span {
+    animation: none;
+  }
 }
 
 /* ═══════ MAGNETIC BUTTON ═══════ */
